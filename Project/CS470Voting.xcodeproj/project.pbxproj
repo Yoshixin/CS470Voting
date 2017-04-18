@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F0F2D891EA587E8005AD45A /* categoriesTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0F2D881EA587E8005AD45A /* categoriesTableVC.swift */; };
+		3F0F2D8B1EA588E1005AD45A /* categoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0F2D8A1EA588E1005AD45A /* categoriesTableViewCell.swift */; };
 		3F30F3861E931DCB00E90631 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30F3851E931DCB00E90631 /* AppDelegate.swift */; };
 		3F30F3881E931DCB00E90631 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30F3871E931DCB00E90631 /* ViewController.swift */; };
 		3F30F38B1E931DCB00E90631 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F30F3891E931DCB00E90631 /* Main.storyboard */; };
@@ -35,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F0F2D881EA587E8005AD45A /* categoriesTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = categoriesTableVC.swift; sourceTree = "<group>"; };
+		3F0F2D8A1EA588E1005AD45A /* categoriesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = categoriesTableViewCell.swift; sourceTree = "<group>"; };
 		3F30F3821E931DCB00E90631 /* CS470Voting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CS470Voting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F30F3851E931DCB00E90631 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F30F3871E931DCB00E90631 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -102,6 +106,8 @@
 				3F30F3851E931DCB00E90631 /* AppDelegate.swift */,
 				3F30F3871E931DCB00E90631 /* ViewController.swift */,
 				3F30F3891E931DCB00E90631 /* Main.storyboard */,
+				3F0F2D881EA587E8005AD45A /* categoriesTableVC.swift */,
+				3F0F2D8A1EA588E1005AD45A /* categoriesTableViewCell.swift */,
 				3F30F38F1E931DCB00E90631 /* Assets.xcassets */,
 				3F30F3911E931DCB00E90631 /* LaunchScreen.storyboard */,
 				3F30F3941E931DCB00E90631 /* Info.plist */,
@@ -262,7 +268,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F0F2D8B1EA588E1005AD45A /* categoriesTableViewCell.swift in Sources */,
 				3F30F3881E931DCB00E90631 /* ViewController.swift in Sources */,
+				3F0F2D891EA587E8005AD45A /* categoriesTableVC.swift in Sources */,
 				3F30F3861E931DCB00E90631 /* AppDelegate.swift in Sources */,
 				3F30F38E1E931DCB00E90631 /* CS470Voting.xcdatamodeld in Sources */,
 			);
@@ -509,6 +517,7 @@
 				3F30F3AF1E931DCC00E90631 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3F30F3B01E931DCC00E90631 /* Build configuration list for PBXNativeTarget "CS470VotingTests" */ = {
 			isa = XCConfigurationList;
@@ -517,6 +526,7 @@
 				3F30F3B21E931DCC00E90631 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3F30F3B31E931DCC00E90631 /* Build configuration list for PBXNativeTarget "CS470VotingUITests" */ = {
 			isa = XCConfigurationList;
@@ -525,6 +535,7 @@
 				3F30F3B51E931DCC00E90631 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
