@@ -8,10 +8,11 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class HomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
     //outlets for the profile options drop down
     @IBOutlet weak var dropDown: UIPickerView!
+    
     @IBOutlet weak var textBox: UITextField!
     
     
@@ -59,6 +60,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         if textField == self.textBox {
             self.dropDown.isHidden = false
         }
+        
+       
     }
     
 }

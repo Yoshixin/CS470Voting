@@ -1,20 +1,32 @@
 //
-//  categoriesTableVC.swift
+//  nomineeTableVC.swift
 //  CS470Voting
 //
-//  Created by student on 4/17/17.
+//  Created by Joe Mogannam on 4/18/17.
 //  Copyright © 2017 student. All rights reserved.
 //
 
 import UIKit
 
-class categoriesTableVC: UITableViewController {
+class nomineeTableVC: UITableViewController {
     
-    var categories = ["Best Pic", "Best Artist"]
+    // a category name is used to look up an array of nominee names
+    // this is a dictionary whos values are arrays of strings
+    var chosenCategory = "NONE"
+    
+    var allNominees =  [String: [String]]()
+    
+    func useCategory(_ categoryToUse: String){
+        chosenCategory = categoryToUse
+    }
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        allNominees["Best Pic"] = ["Fugitive, The", "Rocky", "Inside out", "Mission Impossible"]
+        allNominees["Best Artist"] = ["Harrison Ford", "Sean Connery", "Daniel Draig", "Scarlett Johansson", "Sandra Bullock", "Emma Stone", "Julia Roberts"]
+        
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -37,77 +49,54 @@ class categoriesTableVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        var someNominees = allNominees[chosenCategory]
         
-        
-        if  categories.count > 0{
-            return categories.count
-    
+        if (someNominees?.count)! > 0 {
+            return (someNominees?.count)!
+            
         }
+        
+        
+        
         
         return 0
     }
     
-    // TODO :
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath)
+        // handles the creation of a generic table view cell & casting it to an nomineTableViewCell,
+        // and than populating it with data
         
-        let allCategories = categories
+        // create a generic reusable tableViewCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: "nomineeCell", for: indexPath)
         
-        if let theCell = cell as? categoriesTableViewCell,
-            let category = allCategories[indexPath.row] as? String {
+        
+        
+        
+        
+        // cast the genric cell to a nomineeTableViewCell so we cal populat the cell
+        // with data
+        if let theCell = cell as? nomineeTableViewCell {
             
-
+                // get all nominees for a Category from allNominees
+                let nominees = allNominees[chosenCategory]
+            //dictionary allNominees is a dictionary of arrays, the key is an string.
+            //The value is an array of Strings
             
-            theCell.useCategory(category)
+            
+           
+            
+            // pass the nominee data to the current cell to be displayed
+            theCell.useNominee((nominees?[indexPath.row ])!)
+            
+            cell = theCell
         }
+        
+        
+        
         
         return cell
     }
-    
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // handles the transition from ArtistTableViewController to AlbumTableViewController
-        
-        
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        //print("in ArtistsViewController, prepare()")
-        
-        
-        if segue.identifier == "categoryToNominee" {
-            
-            
-            // get the current cell
-            let cell = sender as! categoriesTableViewCell
-            
-            // set up the transition from the current cell to the next tableviewcontroller
-            if let indexPath = tableView.indexPath(for: cell) {
-                
-                // create a new nomineeTableViewController to transition to
-                let nTableVC = segue.destination as! nomineeTableVC
-                
-                // pass the current category to the next tableViewController, so we have access to the
-                // category
-                // The category name is used to look up all nominees in a category
-                
-                var aCategory = categories[indexPath.row]
-                var tempa = nTableVC.useCategory(aCategory)
-                
-                //tempa?.printArtist()
-            }
-            
-        }
-        
-        
-    }
 
-    
-    
-    
-    
-    
-    
     
     
     
@@ -159,6 +148,14 @@ class categoriesTableVC: UITableViewController {
     }
     */
 
-   
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
 
 }

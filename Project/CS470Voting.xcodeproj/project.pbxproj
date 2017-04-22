@@ -10,13 +10,18 @@
 		3F0F2D891EA587E8005AD45A /* categoriesTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0F2D881EA587E8005AD45A /* categoriesTableVC.swift */; };
 		3F0F2D8B1EA588E1005AD45A /* categoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0F2D8A1EA588E1005AD45A /* categoriesTableViewCell.swift */; };
 		3F30F3861E931DCB00E90631 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30F3851E931DCB00E90631 /* AppDelegate.swift */; };
-		3F30F3881E931DCB00E90631 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30F3871E931DCB00E90631 /* ViewController.swift */; };
+		3F30F3881E931DCB00E90631 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30F3871E931DCB00E90631 /* HomeViewController.swift */; };
 		3F30F38B1E931DCB00E90631 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F30F3891E931DCB00E90631 /* Main.storyboard */; };
 		3F30F38E1E931DCB00E90631 /* CS470Voting.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F30F38C1E931DCB00E90631 /* CS470Voting.xcdatamodeld */; };
 		3F30F3901E931DCB00E90631 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F30F38F1E931DCB00E90631 /* Assets.xcassets */; };
 		3F30F3931E931DCB00E90631 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F30F3911E931DCB00E90631 /* LaunchScreen.storyboard */; };
 		3F30F39E1E931DCC00E90631 /* CS470VotingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30F39D1E931DCC00E90631 /* CS470VotingTests.swift */; };
 		3F30F3A91E931DCC00E90631 /* CS470VotingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30F3A81E931DCC00E90631 /* CS470VotingUITests.swift */; };
+		6749BDE01EA84D2500F0D94B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6749BDDF1EA84D2500F0D94B /* RegisterViewController.swift */; };
+		6749BDE21EA8630D00F0D94B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6749BDE11EA8630D00F0D94B /* LoginViewController.swift */; };
+		67CD0BC21EA6FE76003C75F3 /* nomineeTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CD0BC11EA6FE76003C75F3 /* nomineeTableVC.swift */; };
+		67CD0BC41EA70789003C75F3 /* nomineeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CD0BC31EA70789003C75F3 /* nomineeTableViewCell.swift */; };
+		67F48F431EA846CF002B05FA /* PreLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F48F421EA846CF002B05FA /* PreLoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +46,7 @@
 		3F0F2D8A1EA588E1005AD45A /* categoriesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = categoriesTableViewCell.swift; sourceTree = "<group>"; };
 		3F30F3821E931DCB00E90631 /* CS470Voting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CS470Voting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F30F3851E931DCB00E90631 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3F30F3871E931DCB00E90631 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3F30F3871E931DCB00E90631 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3F30F38A1E931DCB00E90631 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3F30F38D1E931DCB00E90631 /* CS470Voting.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CS470Voting.xcdatamodel; sourceTree = "<group>"; };
 		3F30F38F1E931DCB00E90631 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -53,6 +58,11 @@
 		3F30F3A41E931DCC00E90631 /* CS470VotingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CS470VotingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F30F3A81E931DCC00E90631 /* CS470VotingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CS470VotingUITests.swift; sourceTree = "<group>"; };
 		3F30F3AA1E931DCC00E90631 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6749BDDF1EA84D2500F0D94B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		6749BDE11EA8630D00F0D94B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		67CD0BC11EA6FE76003C75F3 /* nomineeTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = nomineeTableVC.swift; sourceTree = "<group>"; };
+		67CD0BC31EA70789003C75F3 /* nomineeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = nomineeTableViewCell.swift; sourceTree = "<group>"; };
+		67F48F421EA846CF002B05FA /* PreLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreLoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,9 +114,14 @@
 			isa = PBXGroup;
 			children = (
 				3F30F3851E931DCB00E90631 /* AppDelegate.swift */,
-				3F30F3871E931DCB00E90631 /* ViewController.swift */,
+				3F30F3871E931DCB00E90631 /* HomeViewController.swift */,
 				3F30F3891E931DCB00E90631 /* Main.storyboard */,
+				67F48F421EA846CF002B05FA /* PreLoginViewController.swift */,
+				6749BDDF1EA84D2500F0D94B /* RegisterViewController.swift */,
+				6749BDE11EA8630D00F0D94B /* LoginViewController.swift */,
 				3F0F2D881EA587E8005AD45A /* categoriesTableVC.swift */,
+				67CD0BC11EA6FE76003C75F3 /* nomineeTableVC.swift */,
+				67CD0BC31EA70789003C75F3 /* nomineeTableViewCell.swift */,
 				3F0F2D8A1EA588E1005AD45A /* categoriesTableViewCell.swift */,
 				3F30F38F1E931DCB00E90631 /* Assets.xcassets */,
 				3F30F3911E931DCB00E90631 /* LaunchScreen.storyboard */,
@@ -268,10 +283,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6749BDE01EA84D2500F0D94B /* RegisterViewController.swift in Sources */,
 				3F0F2D8B1EA588E1005AD45A /* categoriesTableViewCell.swift in Sources */,
-				3F30F3881E931DCB00E90631 /* ViewController.swift in Sources */,
+				67CD0BC21EA6FE76003C75F3 /* nomineeTableVC.swift in Sources */,
+				3F30F3881E931DCB00E90631 /* HomeViewController.swift in Sources */,
 				3F0F2D891EA587E8005AD45A /* categoriesTableVC.swift in Sources */,
+				67F48F431EA846CF002B05FA /* PreLoginViewController.swift in Sources */,
 				3F30F3861E931DCB00E90631 /* AppDelegate.swift in Sources */,
+				67CD0BC41EA70789003C75F3 /* nomineeTableViewCell.swift in Sources */,
+				6749BDE21EA8630D00F0D94B /* LoginViewController.swift in Sources */,
 				3F30F38E1E931DCB00E90631 /* CS470Voting.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
