@@ -178,7 +178,7 @@ class RegisterViewController: UIViewController {
         let myAlert = UIAlertController(title:myTitle, message: myMessage,
                                         preferredStyle: UIAlertControllerStyle.alert)
         
-        let okAction = UIAlertAction(title:"myTitle", style: UIAlertActionStyle.default, handler: nil);
+        let okAction = UIAlertAction(title:"ok", style: UIAlertActionStyle.default, handler: nil);
         
         
         myAlert.addAction(okAction)
