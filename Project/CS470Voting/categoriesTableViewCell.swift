@@ -24,7 +24,7 @@ class categoriesTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func useCategory(_ category: String ) {
+    func useCategory(_ category: String) {
         /*if let aImage = artist.getImage()  {
          cellImage.image = aImage
          }*/
@@ -34,5 +34,7 @@ class categoriesTableViewCell: UITableViewCell {
         
        
     }
+    
+    
 
 }

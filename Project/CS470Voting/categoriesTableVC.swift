@@ -15,6 +15,7 @@ class categoriesTableVC: UITableViewController {
     
     
     var categories = [String]() //["Best Pic", "Best Artist"]
+    var categoryIds = [Int]()
     
     
     override func viewDidLoad() {
@@ -61,11 +62,14 @@ class categoriesTableVC: UITableViewController {
         let allCategories = categories
         
         if let theCell = cell as? categoriesTableViewCell,
-            let category = allCategories[indexPath.row] as? String {
+            let category = allCategories[indexPath.row] as? String  {
+            
+            
             
             
             
             theCell.useCategory(category)
+           
         }
         
         return cell
@@ -89,7 +93,7 @@ class categoriesTableVC: UITableViewController {
             let cell = sender as! categoriesTableViewCell
             
             // set up the transition from the current cell to the next tableviewcontroller
-            if let indexPath = tableView.indexPath(for: cell) {
+            if let indexPath = tableView.indexPath(for: cell), let categoryId = categoryIds[indexPath.row] as? Int {
                 
                 // create a new nomineeTableViewController to transition to
                 let nTableVC = segue.destination as! nomineeTableVC
@@ -100,6 +104,7 @@ class categoriesTableVC: UITableViewController {
                 
                 var aCategory = categories[indexPath.row]
                 var tempa = nTableVC.useCategory(aCategory)
+                 nTableVC.useCategoryId(categoryId)
                 
                 //tempa?.printArtist()
             }
@@ -167,6 +172,9 @@ class categoriesTableVC: UITableViewController {
                         
                         // get the category name as a string
                         var categoryName = tempData["category_name"] as! String
+                        var categoryId = tempData["category_id"] as! String
+                        var tempId = Int(categoryId)
+                        self.categoryIds.append( tempId!)
                         self.categories.append( categoryName)
                         
                         

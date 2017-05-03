@@ -12,19 +12,26 @@ class nomineeTableVC: UITableViewController {
     
     // a category name is used to look up an array of nominee names
     // this is a dictionary whos values are arrays of strings
-    var chosenCategory = "NONE"
+    var chosenCategory = String()
+    var chosenId = Int()
     
-    var allNominees =  [String: [String]]()
+    var allNominees : Dictionary<Int, Array<String>> = [:] //  [Int: [String]  ]()
     
     func useCategory(_ categoryToUse: String){
         chosenCategory = categoryToUse
     }
     
+    func useCategoryId (_ categoryId : Int){
+        chosenId = categoryId;
+        
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        allNominees["Best Picture"] = ["Fugitive, The", "Rocky", "Inside out", "Mission Impossible"]
-        allNominees["Best Artist"] = ["Harrison Ford", "Sean Connery", "Daniel Draig", "Scarlett Johansson", "Sandra Bullock", "Emma Stone", "Julia Roberts"]
+        downloadNominees(chosenId)
+        //allNominees["Best Picture"] = ["Fugitive, The", "Rocky", "Inside out", "Mission Impossible"]
+        //allNominees["Best Artist"] = ["Harrison Ford", "Sean Connery", "Daniel Draig", "Scarlett Johansson", "Sandra Bullock", "Emma Stone", "Julia //Roberts"]
         
         
         
@@ -49,7 +56,7 @@ class nomineeTableVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        var someNominees = allNominees[chosenCategory]
+        let someNominees = allNominees[chosenId]
         
         
         if someNominees != nil{ // make sure the category exists in our dictionary of categories
@@ -81,7 +88,7 @@ class nomineeTableVC: UITableViewController {
         if let theCell = cell as? nomineeTableViewCell {
             
             // get all nominees for a Category from allNominees
-            let nominees = allNominees[chosenCategory]
+            let nominees = allNominees[chosenId]
             //dictionary allNominees is a dictionary of arrays, the key is an string.
             //The value is an array of Strings
             
@@ -102,63 +109,150 @@ class nomineeTableVC: UITableViewController {
     
     
     
+    func downloadNominees(_ catId : Int)  {
+        
+        // currently the php script to inseert data is on my blue account
+        let request = NSMutableURLRequest(url: NSURL(string: "https://www.cs.sonoma.edu/~mogannam/nomineesView.php")! as URL)
+        
+        
+        // bundle up data needed by script in POST method
+        request.httpMethod = "POST"
+        //we don't need to send any parameters for this php script, so leave post string empty
+        let postString = "category_id=\(catId)" //"a=\(email!)&b=\(password!)"
+        
+        // actually bundeling up done
+        request.httpBody = postString.data(using: String.Encoding.utf8)
+        
+        
+        
+        // ++++ Waring start of threading ++++
+        let task = URLSession.shared.dataTask(with: request as URLRequest){
+            data, response, error in
+            // I believe this let structure is using the format of "completion handler"
+            // my basic understanding is: data contains the response the script outputs back to swift,
+            // response is used by swift to generate message based on what happens when communication with the script,
+            // error will contain hopefully an error code/message that swift generates when the connection fails
+            
+            var  categoryId_ofNominee = -1
+            
+            
+            // check if the connection is even possible
+            if error != nil {
+                print("\n error: ", error ?? "no error explenation given")
+                return;
+            }
+            
+            
+            
+            print("before break ")
+            
+            // attempt to retrive data from database
+            do {
+                
+                // converte the data response from php script to json array
+                var json = (try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSArray)!
+                
+                //print(json)
+                
+                if let parseJson = json as? NSArray  { // unwrap json as an NSArray
+                    // parjson will contain an array of Json Dictionaries
+                    // each dictionary represents 1 category stored on fatabase
+                    
+                    //print(parseJson)
+                    
+                    
+                    
+                    
+                    // loop through all categories.
+                    for index in 0 ... parseJson.count - 1 {
+                        
+                        let tempData = parseJson[index ] as! NSDictionary
+                        print(tempData)
+                        
+                       
+                        
+                        
+                        // get the category name as a string
+                        let nomineeName = tempData["nominee_name"] as! String
+                        var tempId = tempData["category_id"] as! String
+                        categoryId_ofNominee = Int(tempId)!  as! Int
+                        
+                        
+                        
+                        print("in the loop cat id : ", categoryId_ofNominee, "\n")
+                        // if an categories  has no nominees  yet, make an array with one nominee
+                        let keyExists = self.allNominees[categoryId_ofNominee] != nil
+                        if keyExists == false {
+                            
+                            var tempArray = [String]()
+                            tempArray.append(nomineeName)
+                            
+                            self.allNominees[categoryId_ofNominee] = tempArray
+                        }
+                        
+                        // if a nominee already has category && the nominee is not a duplicate
+                        // get an array of all nominees for a single category, from the current dictionary
+                        // check if the current nominee is already in the array
+                        if keyExists == true,(self.allNominees[categoryId_ofNominee]?.contains(nomineeName))! == false {
+                            // if the nominee is not already in the array, add it
+                            var tempArray = [String]()
+                            tempArray = self.allNominees[categoryId_ofNominee]!
+                            tempArray.append(nomineeName)
+                            
+                            self.allNominees[categoryId_ofNominee]? = tempArray//.append(nomineeName)
+                        }
+                        
+                        
+                        
+                        //self.nominees.append( nomineeName)
+                        
+                        
+                        
+                    }
+                    
+                    json = parseJson;
+                    
+                    
+                    
+                    
+                    print("++ ")
+                    print(self.allNominees[categoryId_ofNominee] ?? "Nothing found \n")
+                    print("++ END ++")
+                    print("server done")
+                    
+                    
+                }
+                
+                
+                // *** Important Code ****
+                // this code is needed to update the table view controller
+                // since this code runs on its own thread, there is potential of the
+                // view controller loading before the data was even donloaded resulting in an empty view controller
+                // So at the end of the download we need the view controller to update itself
+                DispatchQueue.main.async(execute: {
+                    self.tableView.reloadData()
+                })
+                
+                // *** ***** ********
+                
+                
+            }
+            catch let caughtError as NSError {
+                print("caught error: ", caughtError)
+                return;
+            }
+            
+        }
+        
+        task.resume()
+        
+        
+        
+        
+    }
+
     
     
     
-    
-    /*
-     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-     
-     // Configure the cell...
-     
-     return cell
-     }
-     */
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
