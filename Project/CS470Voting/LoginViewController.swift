@@ -8,6 +8,24 @@
 
 import UIKit
 
+// credentials from user
+var email = "-1"//String()
+var password = "-1"// String()
+var logedInId = 1;
+var chosenCategoryId = -1
+
+var globalPushFunctionMsg = "-1"
+
+
+
+
+
+
+ 
+
+
+
+
 class LoginViewController: UIViewController {
     
     // text fields to get user data
@@ -17,8 +35,10 @@ class LoginViewController: UIViewController {
     
     // global variables to hold response/data from database
     
-    var emailPulled = String() // used to store credentials pulled from database
+    //var emailPulled = String() // used to store credentials pulled from database
     var passwordPulled = String() // to check against users inputed credentials
+    var emailPulled = String()
+    var accountIdPulled = Int()
     
     var resultValue = String() // contains the message to indicate how Mysql responds to the query
                             // will contain one of my custom reponse message from php script
@@ -50,12 +70,12 @@ class LoginViewController: UIViewController {
        
         
         // credentials from user
-        let email = userEmail.text
-        let password = userPassword.text
+         email = userEmail.text!
+         password = userPassword.text!
         
         
         // both fields must be filled out
-        if ((email?.isEmpty)! || (password?.isEmpty)!) {
+        if ((email.isEmpty) || (password.isEmpty)) {
             DispatchQueue.main.async {self.displayMSG("Both Fields must be filled out! ", "Oops!")}
             
             
@@ -76,7 +96,7 @@ class LoginViewController: UIViewController {
         
         // package up credentials to search database
         request.httpMethod = "POST"
-        let postString = "account_email=\(email!)&account_password=\(password!)"
+        let postString = "account_email=\(email)&account_password=\(password)"
         request.httpBody = postString.data(using: String.Encoding.utf8)
         
         
@@ -160,6 +180,9 @@ class LoginViewController: UIViewController {
                         // set global variables, by parsing dictionary from queryResults
                         self.emailPulled = tempResults["account_email"] as! String;
                         self.passwordPulled = tempResults["account_password"] as! String;
+                        let tempId = tempResults["account_id"] as! String;
+                        self.accountIdPulled  = Int(tempId)!
+                        
                         self.json = parseJson;
                         
                         
@@ -195,7 +218,7 @@ class LoginViewController: UIViewController {
             
             // force the code to run on the main thread
             // check user inputed  credentials against pulled credentials
-            DispatchQueue.main.async{self.check_credentials(email!,password!)}
+            DispatchQueue.main.async{self.check_credentials(email,password)}
             
         }
     
@@ -248,7 +271,7 @@ class LoginViewController: UIViewController {
                 // if user entered both fields, we can check credentials if they match
                 
                 
-                self.attemptLogin(email, password, self.emailPulled, self.passwordPulled, self.resultValue)
+                self.attemptLogin(email, password, self.emailPulled, self.passwordPulled, self.resultValue, self.accountIdPulled)
             }
             
         }
@@ -278,7 +301,8 @@ class LoginViewController: UIViewController {
   
     
     
-    func attemptLogin (_ theEmail: String, _ thePassword: String, _ theEmailPulled: String, _ thePasswordPulled: String, _ theresultValue: String) {
+    func attemptLogin (_ theEmail: String, _ thePassword: String, _ theEmailPulled: String,
+                       _ thePasswordPulled: String, _ theresultValue: String, _ theIdPulled : Int) {
         
         print("-- email: ",theEmail, "|| password: ",  thePassword, "|| passwordPulled :", thePasswordPulled, " -- ")
         
@@ -290,6 +314,7 @@ class LoginViewController: UIViewController {
                 
                     
                 //print("the user ", userEmail, "sucessfully loged in")
+                logedInId =  theIdPulled
                 self.isUserLoggedIn = true
                 
                 

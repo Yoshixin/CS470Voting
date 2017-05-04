@@ -10,28 +10,36 @@ import UIKit
 
 class nomineeTableVC: UITableViewController {
     
-    // a category name is used to look up an array of nominee names
+   
+    var chosenCategory = String() // is populated in prepare function of catergoryTableVC
+    
+    
+    // a category id is used to look up an array of nominee names
     // this is a dictionary whos values are arrays of strings
-    var chosenCategory = String()
-    var chosenId = Int()
-    
     var allNominees : Dictionary<Int, Array<String>> = [:] //  [Int: [String]  ]()
+    var allNomineesIds : Dictionary<Int, Array<Int>> = [:]
     
+    // these two functions are used in the catergoryTableVC to set our global variables
+    // based on the category selected by the user
     func useCategory(_ categoryToUse: String){
         chosenCategory = categoryToUse
     }
     
     func useCategoryId (_ categoryId : Int){
-        chosenId = categoryId;
+        chosenCategoryId = categoryId;
         
     }
     
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        downloadNominees(chosenId)
-        //allNominees["Best Picture"] = ["Fugitive, The", "Rocky", "Inside out", "Mission Impossible"]
-        //allNominees["Best Artist"] = ["Harrison Ford", "Sean Connery", "Daniel Draig", "Scarlett Johansson", "Sandra Bullock", "Emma Stone", "Julia //Roberts"]
+        
+        // pull nominess data from a MysqlView using a php file
+        print("logged in user is : ", logedInId)
+        
+        downloadNominees(chosenCategoryId)
+        
         
         
         
@@ -56,9 +64,12 @@ class nomineeTableVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        let someNominees = allNominees[chosenId]
         
+        // get an array of nomines from our dictionary by using the category id 
+        // chosen by the user as the key
+        let someNominees = allNominees[chosenCategoryId]
         
+        // make sure the array of nominees is not empty
         if someNominees != nil{ // make sure the category exists in our dictionary of categories
             if (someNominees?.count)! > 0 { // get the number of nominees in this one category
                 return (someNominees?.count)!
@@ -88,15 +99,15 @@ class nomineeTableVC: UITableViewController {
         if let theCell = cell as? nomineeTableViewCell {
             
             // get all nominees for a Category from allNominees
-            let nominees = allNominees[chosenId]
+            let nominees = allNominees[chosenCategoryId]
             //dictionary allNominees is a dictionary of arrays, the key is an string.
             //The value is an array of Strings
             
-            
+            let nomineesIds = allNomineesIds[chosenCategoryId]
             
             
             // pass the nominee data to the current cell to be displayed
-            theCell.useNominee((nominees?[indexPath.row ])!)
+            theCell.useNominee((nominees?[indexPath.row ])!  , (nomineesIds?[indexPath.row ])!)
             
             cell = theCell
         }
@@ -117,8 +128,12 @@ class nomineeTableVC: UITableViewController {
         
         // bundle up data needed by script in POST method
         request.httpMethod = "POST"
-        //we don't need to send any parameters for this php script, so leave post string empty
-        let postString = "category_id=\(catId)" //"a=\(email!)&b=\(password!)"
+        
+        // I dont belive the php script uses the category_id anymore since we changed the script
+        // to always pull all data
+        
+        // account_id, category_id, nomine_id
+        let postString = "account_id=\(logedInId)&category_id=\(catId)" //"a=\(email!)&b=\(password!)"
         
         // actually bundeling up done
         request.httpBody = postString.data(using: String.Encoding.utf8)
@@ -133,7 +148,10 @@ class nomineeTableVC: UITableViewController {
             // response is used by swift to generate message based on what happens when communication with the script,
             // error will contain hopefully an error code/message that swift generates when the connection fails
             
+            // used to insert new data in our dictionary,
             var  categoryId_ofNominee = -1
+            var  nomineeId = -1
+
             
             
             // check if the connection is even possible
@@ -144,7 +162,7 @@ class nomineeTableVC: UITableViewController {
             
             
             
-            print("before break ")
+        
             
             // attempt to retrive data from database
             do {
@@ -156,30 +174,42 @@ class nomineeTableVC: UITableViewController {
                 
                 if let parseJson = json as? NSArray  { // unwrap json as an NSArray
                     // parjson will contain an array of Json Dictionaries
-                    // each dictionary represents 1 category stored on fatabase
+                    // each dictionary represents 1 category stored on database
                     
                     //print(parseJson)
                     
                     
                     
                     
-                    // loop through all categories.
+                    // loop through all categories --> 1 category is a dictionary.
                     for index in 0 ... parseJson.count - 1 {
                         
+                        // cast the 1 category to a dictionary
                         let tempData = parseJson[index ] as! NSDictionary
-                        print(tempData)
+                        //print(tempData)
                         
                        
                         
                         
                         // get the category name as a string
                         let nomineeName = tempData["nominee_name"] as! String
+                        
+                        // category id on mysql is stored as a string so you need to cast it to a
+                        // string before we can cast it to an Int
                         var tempId = tempData["category_id"] as! String
                         categoryId_ofNominee = Int(tempId)!  as! Int
                         
+                        var tempNomineeId = tempData["nominee_id"] as! String
+                        nomineeId = Int(tempNomineeId)! as! Int
                         
                         
-                        print("in the loop cat id : ", categoryId_ofNominee, "\n")
+                        
+                        
+                        
+                        
+                        
+                        //print("in the loop cat id : ", categoryId_ofNominee, "\n")
+                        
                         // if an categories  has no nominees  yet, make an array with one nominee
                         let keyExists = self.allNominees[categoryId_ofNominee] != nil
                         if keyExists == false {
@@ -187,7 +217,12 @@ class nomineeTableVC: UITableViewController {
                             var tempArray = [String]()
                             tempArray.append(nomineeName)
                             
+                            var temparray2 = [Int]()
+                            temparray2.append(nomineeId)
+                            
+                            
                             self.allNominees[categoryId_ofNominee] = tempArray
+                            self.allNomineesIds[categoryId_ofNominee] = temparray2
                         }
                         
                         // if a nominee already has category && the nominee is not a duplicate
@@ -200,6 +235,14 @@ class nomineeTableVC: UITableViewController {
                             tempArray.append(nomineeName)
                             
                             self.allNominees[categoryId_ofNominee]? = tempArray//.append(nomineeName)
+                            
+                            
+                            
+                            var tempArray2 = [Int]()
+                            tempArray2 = self.allNomineesIds[categoryId_ofNominee]!
+                            tempArray2.append(nomineeId)
+                            
+                            self.allNomineesIds[categoryId_ofNominee]? = tempArray2
                         }
                         
                         
@@ -227,7 +270,7 @@ class nomineeTableVC: UITableViewController {
                 // *** Important Code ****
                 // this code is needed to update the table view controller
                 // since this code runs on its own thread, there is potential of the
-                // view controller loading before the data was even donloaded resulting in an empty view controller
+                // view controller loading before the data was even donwloaded resulting in an empty view controller
                 // So at the end of the download we need the view controller to update itself
                 DispatchQueue.main.async(execute: {
                     self.tableView.reloadData()
