@@ -17,6 +17,8 @@
 		3F30F3931E931DCB00E90631 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F30F3911E931DCB00E90631 /* LaunchScreen.storyboard */; };
 		3F30F39E1E931DCC00E90631 /* CS470VotingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30F39D1E931DCC00E90631 /* CS470VotingTests.swift */; };
 		3F30F3A91E931DCC00E90631 /* CS470VotingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30F3A81E931DCC00E90631 /* CS470VotingUITests.swift */; };
+		3FBBCDB41EBAB4EB00A17301 /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBBCDB31EBAB4EB00A17301 /* GroupTableViewCell.swift */; };
+		3FBBCDB61EBAD63800A17301 /* GroupsWithButtonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBBCDB51EBAD63800A17301 /* GroupsWithButtonVC.swift */; };
 		6749BDE01EA84D2500F0D94B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6749BDDF1EA84D2500F0D94B /* RegisterViewController.swift */; };
 		6749BDE21EA8630D00F0D94B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6749BDE11EA8630D00F0D94B /* LoginViewController.swift */; };
 		67CD0BC21EA6FE76003C75F3 /* nomineeTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CD0BC11EA6FE76003C75F3 /* nomineeTableVC.swift */; };
@@ -58,6 +60,8 @@
 		3F30F3A41E931DCC00E90631 /* CS470VotingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CS470VotingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F30F3A81E931DCC00E90631 /* CS470VotingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CS470VotingUITests.swift; sourceTree = "<group>"; };
 		3F30F3AA1E931DCC00E90631 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3FBBCDB31EBAB4EB00A17301 /* GroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
+		3FBBCDB51EBAD63800A17301 /* GroupsWithButtonVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsWithButtonVC.swift; sourceTree = "<group>"; };
 		6749BDDF1EA84D2500F0D94B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		6749BDE11EA8630D00F0D94B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		67CD0BC11EA6FE76003C75F3 /* nomineeTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = nomineeTableVC.swift; sourceTree = "<group>"; };
@@ -127,6 +131,8 @@
 				3F30F3911E931DCB00E90631 /* LaunchScreen.storyboard */,
 				3F30F3941E931DCB00E90631 /* Info.plist */,
 				3F30F38C1E931DCB00E90631 /* CS470Voting.xcdatamodeld */,
+				3FBBCDB31EBAB4EB00A17301 /* GroupTableViewCell.swift */,
+				3FBBCDB51EBAD63800A17301 /* GroupsWithButtonVC.swift */,
 			);
 			path = CS470Voting;
 			sourceTree = "<group>";
@@ -283,9 +289,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FBBCDB61EBAD63800A17301 /* GroupsWithButtonVC.swift in Sources */,
 				6749BDE01EA84D2500F0D94B /* RegisterViewController.swift in Sources */,
 				3F0F2D8B1EA588E1005AD45A /* categoriesTableViewCell.swift in Sources */,
 				67CD0BC21EA6FE76003C75F3 /* nomineeTableVC.swift in Sources */,
+				3FBBCDB41EBAB4EB00A17301 /* GroupTableViewCell.swift in Sources */,
 				3F30F3881E931DCB00E90631 /* HomeViewController.swift in Sources */,
 				3F0F2D891EA587E8005AD45A /* categoriesTableVC.swift in Sources */,
 				67F48F431EA846CF002B05FA /* PreLoginViewController.swift in Sources */,
