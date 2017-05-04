@@ -30,7 +30,7 @@ class PreLoginViewController: UIViewController {
         var isUserLoggedIn = UserDefaults.standard.bool(forKey: "isUserLoggedIn")
         // if you set isUserLoggedIn to true you can skip al login/register pages
         
-        isUserLoggedIn = true
+        isUserLoggedIn = false
         
         
         
