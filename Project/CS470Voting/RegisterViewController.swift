@@ -11,6 +11,7 @@ import UIKit
 
 class RegisterViewController: UIViewController {
     
+    @IBOutlet weak var Username: UITextField! // aka nickName
     @IBOutlet weak var userEmail: UITextField!
     @IBOutlet weak var userPassword: UITextField!
     //2nd password is to verify user passwords match in register process
@@ -27,12 +28,26 @@ class RegisterViewController: UIViewController {
         let password = userPassword.text
         let passwordCheck = userPasswordCheck.text
         
+        let nickName = Username.text
+        
         // check for empty fields
         if ((email?.isEmpty)! ||  ((password?.isEmpty)!)  ||
-            (passwordCheck?.isEmpty)!) {
+            (passwordCheck?.isEmpty)!  || (nickName?.isEmpty)!) {
             // display error message
              DispatchQueue.main.async{self.displayMSG("A Register field was empty ", "Ooops!") }
             return; // return, stops user from continuing
+        }
+        
+        
+        // regular expression for email found on the web
+        var myEmailExpress = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}";
+        
+        var emailCheck = matchRegExp(for: myEmailExpress, in: email!)
+        
+        
+        // check if the inputed email is formatted right
+        if(emailCheck.isEmpty) {
+            DispatchQueue.main.async{self.displayMSG("Your email is not formated right!", "try again!" )}
         }
         
         // check if passwords match
@@ -52,7 +67,7 @@ class RegisterViewController: UIViewController {
         
         // bundle up data needed by script in POST method
         request.httpMethod = "POST"
-        let postString = "a=\(email!)&b=\(password!)"
+        let postString = "email=\(email!)&password=\(password!)&nickName=\(nickName!)"
         
         // actually bundeling up done
         request.httpBody = postString.data(using: String.Encoding.utf8)
@@ -118,20 +133,36 @@ class RegisterViewController: UIViewController {
             // if you successfully insert a new user into database
             if responseString! == "success"{
              
+               
                 DispatchQueue.main.async{ // force the message onto the main thread
                     self.displayMSG("Thank You For Registering!", "Congrats!" )
+                    
+                  
                     
                 
                 }
                 
+               
+                
                 
                 
             }
-            else if responseString! == "duplicate"{
+            else if responseString! == "duplicate_email"{
                 // if user already exists (or possibly other error occured. Read explenation above)
                 
                 DispatchQueue.main.async{ // force the message onto the main thread
-                    self.displayMSG("User already Registered!", "Sorry!!" )
+                    self.displayMSG("User email already Registered!", "Sorry!!" )
+                    
+                    
+                }
+                return;
+                
+            }
+            else if responseString! == "duplicate_nickname"{
+                // if user already exists (or possibly other error occured. Read explenation above)
+                
+                DispatchQueue.main.async{ // force the message onto the main thread
+                    self.displayMSG("User nickname already !", "Sorry!!" )
                     
                     
                 }
@@ -142,8 +173,9 @@ class RegisterViewController: UIViewController {
                 // a different response string was sent back or nothing at all
                 
                 DispatchQueue.main.async{ // force the message onto the main thread
-                    self.displayMSG("An error occured in registering!", "Sorry!!" )
+                  self.displayMSG("An error occured in registering!", "Sorry!!" )
                     
+                   
                     
                 }
                 print("**Error in registering user **")
@@ -173,8 +205,26 @@ class RegisterViewController: UIViewController {
         
     }
     
+    func matchRegExp(for regex: String, in text: String) -> [String] {
+        
+        do {
+            let regex = try NSRegularExpression(pattern: regex) // turn your string into a regex data structure
+            let nsString = text as NSString
+            
+            // search the string
+            let results = regex.matches(in: text, range: NSRange(location: 0, length: nsString.length))
+            
+            return results.map { nsString.substring(with: $0.range)}
+        } catch let error {
+            print("invalid regex: \(error.localizedDescription)")
+            return []
+        }
+    }
     
-    func displayMSG(_ myMessage: String, _ myTitle: String){
+    
+    
+    
+    func displayMSG(_ myMessage: String, _ myTitle: String) {
         let myAlert = UIAlertController(title:myTitle, message: myMessage,
                                         preferredStyle: UIAlertControllerStyle.alert)
         
@@ -184,7 +234,12 @@ class RegisterViewController: UIViewController {
         myAlert.addAction(okAction)
         
         self.present(myAlert, animated:true, completion: nil)
+        
     }
+    
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -198,60 +253,9 @@ class RegisterViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }
 
 
 
-
-
-
-// similar code to a php tutorial to push data but it is old code & I don't know how to fix
-// saved just in case we need it 
-/* // video 3, 12:00 min
- // packagae up the data to be pushed to database
- let myURL = NSURL(string: "https://www.cs.sonoma.edu/~mogannam/public_html/cs470Project/userRegister.php")
- let request = NSMutableURLRequest(url: myURL as! URL)
- request.httpMethod = "POST"
- 
- let postString = "email=\(email)&password=\(password)"
- request.httpBody = postString.data(using: String.Encoding.utf8)
- // end packaging data
- 
- 
- let task =   URLSession.shared.dataTask(with: request as URLRequest) {
- data, response, error in
- 
- 
- if error != nil {
- print("error: ", error ?? "no error")
- return;
- }
- var err: NSError?
- let  json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
- 
- if let parseJSON = json{
- var resultValue = parseJSON["status"] as? String
- print("result: ", resultValue)
- 
- var isUserRegistered = false;
- if resultValue == "Success" { isUserRegistered = true}
- 
- var messageToDisplay = parseJSON["message"] as String!
- if !isUserRegistered {
- messageToDisplay = parseJSON["message"] as String!
- }
- }
- 
- 
- }
- */

@@ -76,7 +76,7 @@ class LoginViewController: UIViewController {
         
         // package up credentials to search database
         request.httpMethod = "POST"
-        let postString = "username=\(email!)&password=\(password!)"
+        let postString = "account_email=\(email!)&account_password=\(password!)"
         request.httpBody = postString.data(using: String.Encoding.utf8)
         
         
@@ -158,8 +158,8 @@ class LoginViewController: UIViewController {
                         
                         
                         // set global variables, by parsing dictionary from queryResults
-                        self.emailPulled = tempResults["username"] as! String;
-                        self.passwordPulled = tempResults["password"] as! String;
+                        self.emailPulled = tempResults["account_email"] as! String;
+                        self.passwordPulled = tempResults["account_password"] as! String;
                         self.json = parseJson;
                         
                         
