@@ -32,12 +32,21 @@ class PreLoginViewController: UIViewController {
         
         isUserLoggedIn = true
         
+        gSignOut()
+        
         
         
         if(!isUserLoggedIn){ // if user not logged in go to Login/Register
+            
+            
+           
             self.performSegue(withIdentifier: "ToLoginView", sender: self)
         }
         else{ // user is loged in go to home
+            let tempDict = ["account_email":"admin@gmail.com", "account_password":"1234567", "account_nickname":"admin", "account_id" : 1] as [String : Any]
+            
+            loggedInUser.setValuesForKeys(tempDict)
+            gUpdateLoginInfo(loggedInUser)
           self.performSegue(withIdentifier: "SkipLogin", sender: self)
         }
     }

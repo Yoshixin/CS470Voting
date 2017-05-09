@@ -8,7 +8,33 @@
 
 import UIKit
 
+
+// an extension to get the view controller from a cell
+extension UIView {
+    var parentViewController: UIViewController? {
+        var parentResponder: UIResponder? = self
+        while parentResponder != nil {
+            parentResponder = parentResponder!.next
+            if let viewController = parentResponder as? UIViewController {
+                return viewController
+            }
+        }
+        return nil
+    }
+}
+
+
+
+
+
+
+
 class nomineeTableViewCell: UITableViewCell {
+    
+    
+  
+    
+    
     
     var chosenNomineeId = -1
     
@@ -20,12 +46,18 @@ class nomineeTableViewCell: UITableViewCell {
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+        //super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
     }
     
+    
+    
+    
+    
+    
    
+    // button to vote for user
     @IBAction func chooseNominee(_ sender: Any) {
         print("in button n id: ", chosenNomineeId )
         
@@ -85,7 +117,46 @@ class nomineeTableViewCell: UITableViewCell {
                 //print("before response")
                 
                 var json = data//(try JSONSerialization.jsonObject(with: data!, //options: .mutableContainers) as? NSString)!
-                print(responseString)
+                
+                
+                
+                //get nomineeTableVC from sthe extension at top of file
+                let tempNomineeTableVC = self.parentViewController as? nomineeTableVC
+                
+             
+                
+                
+                //print(responseString)
+                print(responseString!)
+                // the server includes  extra qoutation marks in the string of responseString
+                // so for string comparison we need to include them when comparing
+                
+                
+                
+                if responseString == "\"success\"" {
+                    
+                    
+                    DispatchQueue.main.async(execute: {
+                        
+                        gDisplayMSG( myMessage: "We saved your vote",  myTitle: "Thank you for voting", sendSelf : tempNomineeTableVC! as! nomineeTableVC )
+                    })
+                    
+                    
+                    
+                    
+                }
+                else if(responseString == "\"succesfully replace\""){
+                   DispatchQueue.main.async(execute: {
+                        gDisplayMSG( myMessage: "We changed your vote",  myTitle: "Thank you for voting", sendSelf : tempNomineeTableVC! as! nomineeTableVC)
+                    })
+                     
+                }
+                else {
+                    DispatchQueue.main.async(execute: {
+                        gDisplayMSG( myMessage: "Try voting again.",  myTitle: "Sorry, an Error ocured", sendSelf : tempNomineeTableVC! as! nomineeTableVC)
+                    })
+                }
+                
                 
                 
                 if let parseJson = json as? NSString  { // unwrap json as an NSArray
@@ -102,6 +173,11 @@ class nomineeTableViewCell: UITableViewCell {
                 globalPushFunctionMsg =  "No string from php"
                 
                 
+                // reload the data b/c we are changin cell color
+              
+                
+                
+                
                 
             }
             catch let caughtError as NSError {
@@ -110,6 +186,7 @@ class nomineeTableViewCell: UITableViewCell {
             }
             
         }
+        
         
         
         task.resume()
@@ -130,5 +207,10 @@ class nomineeTableViewCell: UITableViewCell {
         
         
     }
+    
+    
+   
+    
+    
     
 }

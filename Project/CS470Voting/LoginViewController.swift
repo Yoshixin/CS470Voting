@@ -9,12 +9,7 @@
 import UIKit
 
 // credentials from user
-var email = "-1"//String()
-var password = "-1"// String()
-var logedInId = 1;
-var chosenCategoryId = -1
 
-var globalPushFunctionMsg = "-1"
 
 
 
@@ -39,6 +34,7 @@ class LoginViewController: UIViewController {
     var passwordPulled = String() // to check against users inputed credentials
     var emailPulled = String()
     var accountIdPulled = Int()
+    var nickname = String()
     
     var resultValue = String() // contains the message to indicate how Mysql responds to the query
                             // will contain one of my custom reponse message from php script
@@ -181,6 +177,14 @@ class LoginViewController: UIViewController {
                         self.emailPulled = tempResults["account_email"] as! String;
                         self.passwordPulled = tempResults["account_password"] as! String;
                         let tempId = tempResults["account_id"] as! String;
+                        self.nickname = tempResults["account_nickname"] as! String;
+                        
+                        //set ptenitial current user data, you can't use this user unless they are logged in
+                        // b/c you don't know if the credentials are right yet
+                        loggedInUser.setValuesForKeys(tempResults as! [String : Any])
+                       
+                        
+                        
                         self.accountIdPulled  = Int(tempId)!
                         
                         self.json = parseJson;
@@ -314,6 +318,17 @@ class LoginViewController: UIViewController {
                 
                     
                 //print("the user ", userEmail, "sucessfully loged in")
+                
+                // update firebase  logged in credentials for this user
+                gUpdateLoginInfo(loggedInUser)
+                
+                // update our credentials for mysql user
+                loggedInUser.account_email = theEmail
+                loggedInUser.account_id = accountIdPulled
+                loggedInUser.account_nickname = nickname
+                
+                
+                
                 logedInId =  theIdPulled
                 self.isUserLoggedIn = true
                 
@@ -353,19 +368,3 @@ class LoginViewController: UIViewController {
 
 
 
-
-// old code that didn't work
-/*
- let url = NSURL(string: "https://www.cs.sonoma.edu/~mogannam/loginPhpGeteData.php")
- 
- let data = NSData(contentsOf: url! as URL)
- var tempValues = try!
- JSONSerialization.jsonObject(with: data as! Data, options:
- JSONSerialization.ReadingOptions.mutableContainers) as! NSArray
- 
- 
- tempValues = tempValues.reversed() as NSArray
- reloadInputViews()
- 
- print(tempValues)
- */

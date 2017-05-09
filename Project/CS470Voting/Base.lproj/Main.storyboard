@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rtF-lA-0U2">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rtF-lA-0U2">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -38,7 +38,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Iy-9f-Zdl">
-                                <rect key="frame" x="65" y="257" width="245" height="113"/>
+                                <rect key="frame" x="65" y="227" width="245" height="67"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Vote Now!">
@@ -50,7 +50,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8J8-Ct-6Kh">
-                                <rect key="frame" x="65" y="411" width="245" height="50"/>
+                                <rect key="frame" x="65" y="319" width="245" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="My Votes">
@@ -59,7 +59,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="24g-cb-n4S">
-                                <rect key="frame" x="65" y="506" width="245" height="50"/>
+                                <rect key="frame" x="65" y="414" width="245" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Groups">
@@ -68,7 +68,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ehX-Pl-jir">
-                                <rect key="frame" x="65" y="597" width="245" height="50"/>
+                                <rect key="frame" x="65" y="505" width="245" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Global Results">
@@ -103,7 +103,18 @@
                                     <color key="titleShadowColor" cocoaTouchSystemColor="lightTextColor"/>
                                 </state>
                                 <connections>
-                                    <segue destination="sKd-JE-Z7F" kind="presentation" identifier="signoutToLogin" id="mNs-M0-AKJ"/>
+                                    <action selector="didTapSignoutTemp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RXs-jO-BlD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6SD-yM-Ikx">
+                                <rect key="frame" x="65" y="597" width="245" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Chat">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="IlR-It-VDV" kind="show" identifier="homeToChat" id="9hf-Ku-DVT"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -113,11 +124,109 @@
                     <connections>
                         <outlet property="dropDown" destination="dd2-YX-nu0" id="7co-cj-ni6"/>
                         <outlet property="textBox" destination="lN5-Bf-mM9" id="MIN-E4-zOv"/>
+                        <segue destination="sKd-JE-Z7F" kind="presentation" identifier="signoutToLogin" id="sBi-gW-ZXa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="357.60000000000002" y="659.82008995502258"/>
+        </scene>
+        <!--Chat TableVC-->
+        <scene sceneID="pgU-OD-Xua">
+            <objects>
+                <tableViewController storyboardIdentifier="ChatTableVC" id="IlR-It-VDV" customClass="ChatTableVC" customModule="CS470Voting" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="MSv-ot-RYX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="16i-vg-1F0">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="16i-vg-1F0" id="Eaz-pj-bTV">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="IlR-It-VDV" id="M2Q-ux-p8F"/>
+                            <outlet property="delegate" destination="IlR-It-VDV" id="6BL-BQ-tpl"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="E5R-VO-Zvu" kind="show" identifier="chatToNewMessage" id="OJt-rG-TNq"/>
+                        <segue destination="DYM-PW-ueM" kind="show" identifier="chatTableCOntToChatLog" id="ze7-Q3-anQ"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nRc-VF-zAm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1205.5999999999999" y="1218.440779610195"/>
+        </scene>
+        <!--New Message TableVC-->
+        <scene sceneID="PY1-5N-cfb">
+            <objects>
+                <tableViewController id="E5R-VO-Zvu" customClass="NewMessageTableVC" customModule="CS470Voting" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="pPt-dQ-z9J">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="s1h-Pc-SDb">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="s1h-Pc-SDb" id="dRP-IJ-dYI">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="E5R-VO-Zvu" id="FLe-qm-5VY"/>
+                            <outlet property="delegate" destination="E5R-VO-Zvu" id="9VN-zt-S5g"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="DYM-PW-ueM" kind="show" identifier="newMsgToChatLog" id="1ys-tD-Jee"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yHu-G9-ZuX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2054" y="1217"/>
+        </scene>
+        <!--Chat Log TableVC-->
+        <scene sceneID="GKU-5p-YLk">
+            <objects>
+                <collectionViewController storyboardIdentifier="chatLogStoryBoardID" id="DYM-PW-ueM" customClass="ChatLogTableVC" customModule="CS470Voting" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="PW7-qA-Cbs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="E2D-TU-yA1">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="R8h-y2-yoh">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="DYM-PW-ueM" id="Rea-va-gZ3"/>
+                            <outlet property="delegate" destination="DYM-PW-ueM" id="cxf-JO-4AY"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="806-Cy-kzt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1818" y="1989"/>
         </scene>
         <!--Categories TableVC-->
         <scene sceneID="zhy-qL-Zuq">
@@ -178,7 +287,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NSt-CV-R1w">
-                                            <rect key="frame" x="24" y="0.0" width="330" height="68"/>
+                                            <rect key="frame" x="153" y="0.0" width="201" height="68"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Button"/>
                                             <connections>
@@ -244,7 +353,7 @@
         <!--Login View Controller-->
         <scene sceneID="U20-kD-CLH">
             <objects>
-                <viewController id="sKd-JE-Z7F" customClass="LoginViewController" customModule="CS470Voting" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginPageStoryBoardID" id="sKd-JE-Z7F" customClass="LoginViewController" customModule="CS470Voting" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Yte-NM-QSj"/>
                         <viewControllerLayoutGuide type="bottom" id="Be6-ny-RcH"/>
@@ -456,7 +565,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Qla-Zl-48R"/>
         <segue reference="UdP-Bg-XB2"/>
+        <segue reference="sBi-gW-ZXa"/>
+        <segue reference="ze7-Q3-anQ"/>
     </inferredMetricsTieBreakers>
 </document>

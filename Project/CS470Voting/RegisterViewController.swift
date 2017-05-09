@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+
 
 
 class RegisterViewController: UIViewController {
@@ -51,9 +53,14 @@ class RegisterViewController: UIViewController {
         }
         
         // check if passwords match
-        if password != passwordCheck {
+        if password != passwordCheck || (password?.characters.count)! < 7 {
             // display error message
-            DispatchQueue.main.async{self.displayMSG("Your Passwords dont match!", "try again!" )}
+            
+            if((password?.characters.count)! < 7){
+                DispatchQueue.main.async{self.displayMSG("Your Passwords need to be a length of 7+ character", "try again!" )}
+            }
+            
+            DispatchQueue.main.async{self.displayMSG("Your Passwords dont match! ", "try again!" )}
             return;
         }
         
@@ -137,10 +144,15 @@ class RegisterViewController: UIViewController {
                 DispatchQueue.main.async{ // force the message onto the main thread
                     self.displayMSG("Thank You For Registering!", "Congrats!" )
                     
-                  
                     
                 
                 }
+                
+                
+                gAuthenticateFirebaseUser(email!, password!, nickName! )
+                // also add user to databasr
+                
+               
                 
                
                 

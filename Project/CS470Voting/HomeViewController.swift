@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class HomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
@@ -16,11 +17,34 @@ class HomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var textBox: UITextField!
     
     
+    
+    
+    
+    @IBAction func didTapSignoutTemp(_ sender: Any) {
+        
+        
+        performSegue(withIdentifier: "signoutToLogin", sender: self)
+        gSignOut(loggedInUser)
+    }
+    
     let profileOptions = ["Profile","Settings","Sign Out"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        if FIRAuth.auth()?.currentUser?.uid == nil {
+            // if user id is nil log us out b/c firebase can't work w/o user
+            gSignOut()
+            
+        }
+        
+        
+        
+        
+        
+        
+        
 
     }
 

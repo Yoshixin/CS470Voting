@@ -45,7 +45,7 @@ class categoriesTableVC: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
-        print("in tableview ")
+        
         
         if  categories.count > 0{
             return categories.count
@@ -83,7 +83,7 @@ class categoriesTableVC: UITableViewController {
         
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        //print("in ArtistsViewController, prepare()")
+       
         
         
         if segue.identifier == "categoryToNominee" {
@@ -187,8 +187,8 @@ class categoriesTableVC: UITableViewController {
                     
                     
                     
-                    print(self.categories)
-                    print("server done")
+                    
+                    print("in categoreisTableVc server done")
                     
                     
                 }
