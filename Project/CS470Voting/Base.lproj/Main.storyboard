@@ -106,16 +106,17 @@
                         <outlet property="dropDown" destination="dd2-YX-nu0" id="7co-cj-ni6"/>
                         <outlet property="textBox" destination="lN5-Bf-mM9" id="MIN-E4-zOv"/>
                         <segue destination="Aee-s3-Sll" kind="show" identifier="homeToProfile" id="moh-tI-5ls"/>
+                        <segue destination="sKd-JE-Z7F" kind="presentation" identifier="signoutToLogin" id="c1Q-RZ-7Ba"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="357.60000000000002" y="659.82008995502258"/>
         </scene>
-        <!--View Controller-->
+        <!--Profile-->
         <scene sceneID="ag7-9H-ZAm">
             <objects>
-                <viewController id="Aee-s3-Sll" sceneMemberID="viewController">
+                <viewController title="Profile" id="Aee-s3-Sll" customClass="ProfileViewController" customModule="CS470Voting" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Qmp-V8-sAX"/>
                         <viewControllerLayoutGuide type="bottom" id="hNZ-jQ-4oc"/>
@@ -125,25 +126,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gJZ-Qm-Rj9">
-                                <rect key="frame" x="139" y="166" width="97" height="30"/>
+                                <rect key="frame" x="98" y="166" width="179" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="UsernameEditingDidEnd:" destination="Aee-s3-Sll" eventType="editingDidEnd" id="QMo-g1-NuL"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UlQ-rB-Ejp">
-                                <rect key="frame" x="139" y="318" width="97" height="30"/>
+                                <rect key="frame" x="98" y="318" width="179" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BVu-Pa-ek1">
-                                <rect key="frame" x="139" y="236" width="97" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="passwordEditingDidEnd:" destination="Aee-s3-Sll" eventType="editingDidEnd" id="Kug-tv-zUY"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpH-ZY-ePP">
                                 <rect key="frame" x="136" y="137" width="102" height="21"/>
@@ -166,13 +166,28 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BVu-Pa-ek1">
+                                <rect key="frame" x="98" y="236" width="179" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="EmailEditingDidEnd:" destination="Aee-s3-Sll" eventType="editingDidEnd" id="hca-Bd-2lk"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="email" destination="BVu-Pa-ek1" id="3UA-WG-N4V"/>
+                        <outlet property="password" destination="UlQ-rB-Ejp" id="4RT-Co-Tes"/>
+                        <outlet property="username" destination="gJZ-Qm-Rj9" id="74U-5D-m5c"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wnd-O7-3QQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="358" y="1518"/>
+            <point key="canvasLocation" x="357.60000000000002" y="1517.9910044977512"/>
         </scene>
         <!--All Groups-->
         <scene sceneID="ze1-un-5r3">
@@ -670,6 +685,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="UdP-Bg-XB2"/>
-        <segue reference="Qla-Zl-48R"/>
+        <segue reference="c1Q-RZ-7Ba"/>
     </inferredMetricsTieBreakers>
 </document>
