@@ -16,7 +16,8 @@ class HomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var textBox: UITextField!
     
     
-    let profileOptions = ["Profile","Settings","Sign Out"]
+    let profileOptions = ["Profile","Sign Out"]
+    var selectedProfileOption = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,12 +41,20 @@ class HomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         self.view.endEditing(true)
+        selectedProfileOption = profileOptions[row]
         return profileOptions[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.dropDown.isHidden = true
         //Handle changing to selected profile option view here
+        if selectedProfileOption == "Sign Out" {
+            performSegue(withIdentifier: "signoutToLogin", sender: nil)
+        }
+        else if selectedProfileOption == "Profile" {
+            performSegue(withIdentifier: "homeToProfile", sender: nil)
+        }
+        
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {

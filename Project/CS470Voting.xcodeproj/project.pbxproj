@@ -19,6 +19,9 @@
 		3F30F3A91E931DCC00E90631 /* CS470VotingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30F3A81E931DCC00E90631 /* CS470VotingUITests.swift */; };
 		3FBBCDB41EBAB4EB00A17301 /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBBCDB31EBAB4EB00A17301 /* GroupTableViewCell.swift */; };
 		3FBBCDB61EBAD63800A17301 /* GroupsWithButtonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBBCDB51EBAD63800A17301 /* GroupsWithButtonVC.swift */; };
+		3FF0F8151EC1379800E7049D /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF0F8141EC1379800E7049D /* CreateGroupViewController.swift */; };
+		3FF0F8171EC13A5900E7049D /* GroupMembersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF0F8161EC13A5900E7049D /* GroupMembersViewController.swift */; };
+		3FF0F8191EC13D7E00E7049D /* GroupMembersViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF0F8181EC13D7E00E7049D /* GroupMembersViewCell.swift */; };
 		6749BDE01EA84D2500F0D94B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6749BDDF1EA84D2500F0D94B /* RegisterViewController.swift */; };
 		6749BDE21EA8630D00F0D94B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6749BDE11EA8630D00F0D94B /* LoginViewController.swift */; };
 		67CD0BC21EA6FE76003C75F3 /* nomineeTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CD0BC11EA6FE76003C75F3 /* nomineeTableVC.swift */; };
@@ -62,6 +65,9 @@
 		3F30F3AA1E931DCC00E90631 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FBBCDB31EBAB4EB00A17301 /* GroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
 		3FBBCDB51EBAD63800A17301 /* GroupsWithButtonVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsWithButtonVC.swift; sourceTree = "<group>"; };
+		3FF0F8141EC1379800E7049D /* CreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupViewController.swift; sourceTree = "<group>"; };
+		3FF0F8161EC13A5900E7049D /* GroupMembersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMembersViewController.swift; sourceTree = "<group>"; };
+		3FF0F8181EC13D7E00E7049D /* GroupMembersViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMembersViewCell.swift; sourceTree = "<group>"; };
 		6749BDDF1EA84D2500F0D94B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		6749BDE11EA8630D00F0D94B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		67CD0BC11EA6FE76003C75F3 /* nomineeTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = nomineeTableVC.swift; sourceTree = "<group>"; };
@@ -133,6 +139,9 @@
 				3F30F38C1E931DCB00E90631 /* CS470Voting.xcdatamodeld */,
 				3FBBCDB31EBAB4EB00A17301 /* GroupTableViewCell.swift */,
 				3FBBCDB51EBAD63800A17301 /* GroupsWithButtonVC.swift */,
+				3FF0F8141EC1379800E7049D /* CreateGroupViewController.swift */,
+				3FF0F8161EC13A5900E7049D /* GroupMembersViewController.swift */,
+				3FF0F8181EC13D7E00E7049D /* GroupMembersViewCell.swift */,
 			);
 			path = CS470Voting;
 			sourceTree = "<group>";
@@ -289,6 +298,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FF0F8191EC13D7E00E7049D /* GroupMembersViewCell.swift in Sources */,
 				3FBBCDB61EBAD63800A17301 /* GroupsWithButtonVC.swift in Sources */,
 				6749BDE01EA84D2500F0D94B /* RegisterViewController.swift in Sources */,
 				3F0F2D8B1EA588E1005AD45A /* categoriesTableViewCell.swift in Sources */,
@@ -297,6 +307,8 @@
 				3F30F3881E931DCB00E90631 /* HomeViewController.swift in Sources */,
 				3F0F2D891EA587E8005AD45A /* categoriesTableVC.swift in Sources */,
 				67F48F431EA846CF002B05FA /* PreLoginViewController.swift in Sources */,
+				3FF0F8171EC13A5900E7049D /* GroupMembersViewController.swift in Sources */,
+				3FF0F8151EC1379800E7049D /* CreateGroupViewController.swift in Sources */,
 				3F30F3861E931DCB00E90631 /* AppDelegate.swift in Sources */,
 				67CD0BC41EA70789003C75F3 /* nomineeTableViewCell.swift in Sources */,
 				6749BDE21EA8630D00F0D94B /* LoginViewController.swift in Sources */,

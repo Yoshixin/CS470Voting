@@ -11,7 +11,7 @@ import UIKit
 class GroupsWithButtonVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
 
     @IBOutlet weak var tableview: UITableView!
-    @IBOutlet weak var addbutton: UIButton!
+    @IBOutlet weak var createbutton: UIButton!
     
     //  a variable to hold original json data from script in case its needed in future
     var json = NSArray()
@@ -105,18 +105,19 @@ class GroupsWithButtonVC: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "homeToGroups" {
+    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showAGroup" {
             // get the current cell
             let cell = sender as! GroupTableViewCell
-            
+     
             // set up the transition from the current cell to the next tableviewcontroller
             if let indexPath = tableview.indexPath(for: cell), let groupID = groupIds[indexPath.row] as? Int {
-                // create a new GroupTableViewController to transition to
-                let gTableVC = segue.destination as! GroupsWithButtonVC
+                // create a new GroupMembersViewController to transition to
+                let gmTableVC = segue.destination as! GroupMembersViewController
             }
         }
-    }
+    }*/
+    
     
     
 

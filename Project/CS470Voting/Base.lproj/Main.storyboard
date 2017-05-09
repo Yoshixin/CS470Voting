@@ -98,17 +98,6 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="7XQ-jM-07g"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Prc-MY-98t">
-                                <rect key="frame" x="40" y="139" width="111" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="TempSignout">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" cocoaTouchSystemColor="lightTextColor"/>
-                                </state>
-                                <connections>
-                                    <segue destination="sKd-JE-Z7F" kind="presentation" identifier="signoutToLogin" id="mNs-M0-AKJ"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -116,16 +105,79 @@
                     <connections>
                         <outlet property="dropDown" destination="dd2-YX-nu0" id="7co-cj-ni6"/>
                         <outlet property="textBox" destination="lN5-Bf-mM9" id="MIN-E4-zOv"/>
+                        <segue destination="Aee-s3-Sll" kind="show" identifier="homeToProfile" id="moh-tI-5ls"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="357.60000000000002" y="659.82008995502258"/>
         </scene>
-        <!--GroupsWithButton-->
+        <!--View Controller-->
+        <scene sceneID="ag7-9H-ZAm">
+            <objects>
+                <viewController id="Aee-s3-Sll" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Qmp-V8-sAX"/>
+                        <viewControllerLayoutGuide type="bottom" id="hNZ-jQ-4oc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Hwy-Hn-Xwf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gJZ-Qm-Rj9">
+                                <rect key="frame" x="139" y="166" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UlQ-rB-Ejp">
+                                <rect key="frame" x="139" y="318" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BVu-Pa-ek1">
+                                <rect key="frame" x="139" y="236" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpH-ZY-ePP">
+                                <rect key="frame" x="136" y="137" width="102" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lpo-Bi-0hP">
+                                <rect key="frame" x="166" y="207" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aKm-Sd-ZUB">
+                                <rect key="frame" x="143" y="289" width="89" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wnd-O7-3QQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="358" y="1518"/>
+        </scene>
+        <!--All Groups-->
         <scene sceneID="ze1-un-5r3">
             <objects>
-                <viewController title="GroupsWithButton" id="xYG-Rk-ppQ" customClass="GroupsWithButtonVC" customModule="CS470Voting" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="All Groups" id="xYG-Rk-ppQ" customClass="GroupsWithButtonVC" customModule="CS470Voting" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cXJ-JJ-IzQ"/>
                         <viewControllerLayoutGuide type="bottom" id="s76-om-GIw"/>
@@ -143,7 +195,7 @@
                                         <rect key="frame" x="0.0" y="28" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="btP-4R-PuC" id="eom-HA-8Yc">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Groups" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3U-hU-cKZ">
@@ -179,7 +231,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="addbutton" destination="pYc-ke-7cm" id="ugC-bZ-0Y5"/>
+                        <outlet property="createbutton" destination="pYc-ke-7cm" id="iRe-Kc-4nj"/>
                         <outlet property="tableview" destination="Pl7-ff-OJT" id="oqS-6p-Ltb"/>
                     </connections>
                 </viewController>
@@ -187,10 +239,10 @@
             </objects>
             <point key="canvasLocation" x="1336.8" y="1030.4347826086957"/>
         </scene>
-        <!--View Controller-->
+        <!--Group Members-->
         <scene sceneID="Fqj-FC-OU3">
             <objects>
-                <viewController id="xxA-B2-Cl8" sceneMemberID="viewController">
+                <viewController title="Group Members" id="xxA-B2-Cl8" customClass="GroupMembersViewController" customModule="CS470Voting" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RTQ-g1-sDA"/>
                         <viewControllerLayoutGuide type="bottom" id="w2S-Xr-0SQ"/>
@@ -204,11 +256,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="groupCell" id="VOi-PT-Ygu" customClass="GroupTableViewCell" customModule="CS470Voting" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="groupCell" id="VOi-PT-Ygu" customClass="GroupMembersViewCell" customModule="CS470Voting" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VOi-PT-Ygu" id="gyL-6H-nop">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Users in Group" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uda-G8-H6Y">
@@ -221,7 +273,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="groupName" destination="uda-G8-H6Y" id="SeD-ZX-6rt"/>
+                                            <outlet property="memberName" destination="uda-G8-H6Y" id="WQG-mK-ADM"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -235,19 +287,25 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.090657128419999997" green="0.89422765540000004" blue="0.80640595140000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Join Group"/>
+                                <connections>
+                                    <action selector="didTapJoinButton:" destination="xxA-B2-Cl8" eventType="touchUpInside" id="IdG-wy-3bc"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="tableview" destination="mV4-rA-Fln" id="K89-PT-RzZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JAm-Dh-WYN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2349.5999999999999" y="1034.9325337331336"/>
         </scene>
-        <!--View Controller-->
+        <!--Create New Group-->
         <scene sceneID="RJS-pH-dN2">
             <objects>
-                <viewController id="881-JY-in1" sceneMemberID="viewController">
+                <viewController title="Create New Group" id="881-JY-in1" customClass="CreateGroupViewController" customModule="CS470Voting" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="w59-q4-cHV"/>
                         <viewControllerLayoutGuide type="bottom" id="heP-HJ-N5Z"/>
@@ -263,6 +321,9 @@
                                 <state key="normal" title="Create">
                                     <color key="titleColor" red="0.0" green="0.10263642399680561" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="didTapCreateButton:" destination="881-JY-in1" eventType="touchUpInside" id="8Es-sJ-Jv7"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Group Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Z2-o1-OYp">
                                 <rect key="frame" x="122" y="136" width="130" height="30"/>
@@ -608,7 +669,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="mNs-M0-AKJ"/>
         <segue reference="UdP-Bg-XB2"/>
+        <segue reference="Qla-Zl-48R"/>
     </inferredMetricsTieBreakers>
 </document>
