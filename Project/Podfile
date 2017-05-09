@@ -1,0 +1,26 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'CS470Voting' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for CS470Voting
+
+  target 'CS470VotingTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'CS470VotingUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+#stuff i added below
+pod 'Firebase/Database'
+pod 'Firebase/Auth'
+pod 'Firebase/Storage' # used to upload and save user profile images 
+
+
+end
