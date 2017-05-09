@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F0E52CA1EC17F2700CB1823 /* MyVotesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E52C91EC17F2700CB1823 /* MyVotesViewCell.swift */; };
+		3F0E52CC1EC1806400CB1823 /* MyVotesTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E52CB1EC1806400CB1823 /* MyVotesTableVC.swift */; };
 		3F0F2D891EA587E8005AD45A /* categoriesTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0F2D881EA587E8005AD45A /* categoriesTableVC.swift */; };
 		3F0F2D8B1EA588E1005AD45A /* categoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0F2D8A1EA588E1005AD45A /* categoriesTableViewCell.swift */; };
 		3F30F3861E931DCB00E90631 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30F3851E931DCB00E90631 /* AppDelegate.swift */; };
@@ -48,6 +50,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F0E52C91EC17F2700CB1823 /* MyVotesViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyVotesViewCell.swift; sourceTree = "<group>"; };
+		3F0E52CB1EC1806400CB1823 /* MyVotesTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyVotesTableVC.swift; sourceTree = "<group>"; };
 		3F0F2D881EA587E8005AD45A /* categoriesTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = categoriesTableVC.swift; sourceTree = "<group>"; };
 		3F0F2D8A1EA588E1005AD45A /* categoriesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = categoriesTableViewCell.swift; sourceTree = "<group>"; };
 		3F30F3821E931DCB00E90631 /* CS470Voting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CS470Voting.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,6 +149,8 @@
 				3FF0F8161EC13A5900E7049D /* GroupMembersViewController.swift */,
 				3FF0F8181EC13D7E00E7049D /* GroupMembersViewCell.swift */,
 				3FF0F81A1EC14AC500E7049D /* ProfileViewController.swift */,
+				3F0E52C91EC17F2700CB1823 /* MyVotesViewCell.swift */,
+				3F0E52CB1EC1806400CB1823 /* MyVotesTableVC.swift */,
 			);
 			path = CS470Voting;
 			sourceTree = "<group>";
@@ -310,7 +316,9 @@
 				3FF0F81B1EC14AC500E7049D /* ProfileViewController.swift in Sources */,
 				3F30F3881E931DCB00E90631 /* HomeViewController.swift in Sources */,
 				3F0F2D891EA587E8005AD45A /* categoriesTableVC.swift in Sources */,
+				3F0E52CA1EC17F2700CB1823 /* MyVotesViewCell.swift in Sources */,
 				67F48F431EA846CF002B05FA /* PreLoginViewController.swift in Sources */,
+				3F0E52CC1EC1806400CB1823 /* MyVotesTableVC.swift in Sources */,
 				3FF0F8171EC13A5900E7049D /* GroupMembersViewController.swift in Sources */,
 				3FF0F8151EC1379800E7049D /* CreateGroupViewController.swift in Sources */,
 				3F30F3861E931DCB00E90631 /* AppDelegate.swift in Sources */,

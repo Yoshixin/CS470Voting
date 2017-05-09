@@ -10,6 +10,8 @@ import UIKit
 
 class CreateGroupViewController: UIViewController {
 
+    @IBOutlet weak var groupText: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,7 +25,7 @@ class CreateGroupViewController: UIViewController {
     
     @IBAction func didTapCreateButton(_ sender: UIButton) {
         print("Tapped the create button.")
-        let myAlert = UIAlertController(title:"Group Created!", message: "You can find your new group in the previous screen",
+        let myAlert = UIAlertController(title:"Group Created!", message: "You can find your new group on the list of groups",
                                         preferredStyle: UIAlertControllerStyle.alert)
         
         let okAction = UIAlertAction(title:"ok", style: UIAlertActionStyle.default, handler: nil);

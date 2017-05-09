@@ -16,22 +16,14 @@ class nomineeTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-    
     override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
+        //super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
-    
     func useNominee(_ nominee: String ) {
         /*if let aImage = artist.getImage()  {
          cellImage.image = aImage
          }*/
-        
-        
         nomineeName.text = nominee
-        
-        
     }
-    
 }
