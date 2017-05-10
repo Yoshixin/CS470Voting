@@ -9,16 +9,28 @@
 import UIKit
 import Firebase
 class ChatTableVC: UITableViewController {
+    // home screen of chat function
+    // will contain a button with a picture of a pen --> allows you to transition to NewMessageTableVC
+            // allows you to select a new user to send a message to
+    
+    // will eventually contain a list of the most recent message sent to or from the user
+    // clicking on a message in this list -> sends you to the 
+            // chatLogTableVC --> a log of all messages between you and 1 other user
+    
 
     override func viewDidLoad() {
          gCheckFirebaseUserLogin(self, "chat")
         
         super.viewDidLoad()
         
-        
+        // clear out this array b/c if you don't you will get duplicates
+        // each time gFetchAllFirebaseUsers runs
         allFireUsersPulled = [aFirebaseUser]()
+        //get all the potential firebase users you can chat with
         gFetchAllFirebaseUsers(selfSender: self)
 
+        
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -30,7 +42,7 @@ class ChatTableVC: UITableViewController {
         //allFireUsersPulled = [aFirebaseUser]()
         
         
-        
+        // create pen image button to switch to NewMessageTableVC
         let penImage = UIImage(named: "compose-nav-button.png")?.withRenderingMode(.alwaysOriginal)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: penImage, style: .plain, target: self, action: #selector(handleNewMessage))
         
@@ -44,24 +56,30 @@ class ChatTableVC: UITableViewController {
         //self.navigationItem.titleView = myChatLogButtonCentered
         
       
-      
+        // title this of the current user so you know who you are
         self.navigationItem.title = FireBaseUser.account_nickname
         
         //observeMessages() no longer used b/c we fixed a bug that showed the wrong messages for the wrong user
         
+        // get one message per every user you have ever chatted with
         observeOneUsersMessages()
         
         
         
     }
     
-    // grab only newwest mesage for per 1 user i wrote to
+    // an array to hold all messages I have sent or recieved
     var allMessages = [aMessageObject]()
-    // grab only one message to be displayed on chatTableViewController
+    
+    // holds only one message to be displayed on chatTableViewController
+    // only newest mesage per 1 user I message with
     var allMessagesDict = [String: aMessageObject]() // will hold just one message
     
+    // grab all messages between me and other users
     func observeOneUsersMessages(){ // called observeUserMessages in tutorial
         
+        // get id of current firebase user, so that you can verify 
+        // pulling data for this user is valid
         guard let currFireUserId = FIRAuth.auth()?.currentUser?.uid else {
             //if fails the function is exited
             return
@@ -69,45 +87,58 @@ class ChatTableVC: UITableViewController {
         
         
         
-     
+        // first get a refrence of the user-messages "table"
+        // user-messages structure:
+            // root node -> user-messages node -> UserID node -> (a list of message IDs)
+        
+        // in the end  user-messages : is supposed to pull a list of all message ID's one at a time
+        // ever sent or recevied for this user
         let ref = FIRDatabase.database().reference().child("user-messages").child(currFireUserId)
         
         ref.observe(.childAdded, with: { (allMsgsPulled) in
-            //
+            //pull the messageId's for one user
             
+            //get one messageID per iteration of execution
             let messageIDPulled = allMsgsPulled.key
             
+            // pull one message for this message ID
             let messagesRefrence = FIRDatabase.database().reference().child("messages").child(messageIDPulled)
             
             messagesRefrence.observe(.value, with: {(oneUsersMsgs) in
                
                 // ***** code from old function observeMessages ****
                 
-                
-                
+                // converte one message pulled to a dictionary
                 if let myMessageDict = oneUsersMsgs.value as? [String: AnyObject]{
                    
+                    // converte the dictionary to a message object
                     let myMessage = aMessageObject()
                     
                     myMessage.setValuesForKeys(myMessageDict)
                     //self.allMessages.append(myMessage)
                     
+                    // call a function to figure out who I am chatting with
+                    // because a message has a toID & a FromID, we need to figure out
+                    // who we are chatting with based on which user is logged in
                     guard let chatPartnerID = myMessage.getChatPartnerID() else {
                         return // if fail exit
                     }
                     
                     //self.allMessagesDict[myMessage.toWriteTo] = myMessage
+                    // store the most recent message to or from this user in this dictionary
+                    // to be displayed at the top of the ChatTableViewController
                     self.allMessagesDict[chatPartnerID] = myMessage
                     
                     // reconstruct array anytime you change the dictionary
+                    // figure out which message to store first in the dictionary by comparing timeSTamps
+                    // aka figure out which message is most recent
+                    // this is done across all users most recent message,
                     self.allMessages = Array(self.allMessagesDict.values)
                     self.allMessages.sort(by: {  (message1 , message2) -> Bool in
                         //some code
                         return message1.timeSTamp.intValue > message2.timeSTamp.intValue
                         
                     })
-                    
-                    
                     
                     
                     DispatchQueue.main.async{
@@ -133,12 +164,13 @@ class ChatTableVC: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    
+        // figure out how many cells to create
         return allMessages.count
     }
     
     
     func searchForFireUserName(_ theId : String) -> aFirebaseUser?{
+        // find a specific firebaseUser based on FireBase ID
         for element in allFireUsersPulled {
             
             
@@ -151,9 +183,9 @@ class ChatTableVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        // create a custom cell here instead of putting it in a file
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "messageCellID")
-        
-        
         
             // add a time label
             let timeLabel = UILabel()
@@ -180,26 +212,18 @@ class ChatTableVC: UITableViewController {
         
         var oneMessage = allMessages[indexPath.row]
         
-        
+        //get id of person you are chatting with in this "message cell"
         var chatPartnerId = oneMessage.getChatPartnerID()//String()
         
-        /*if oneMessage.fromID == FIRAuth.auth()?.currentUser?.uid {
-            // if the message id is the same as the current user id
-            // the message should be sent to the partner
-            // send message to someone else not logged in on this device
-            chatPartnerId = oneMessage.toWriteTo
-            
-        }
-        else {
-            // else the message id != current user id
-            // and the message should go to the reciver
-            // the messgae should come to the user logged in on this device
-            chatPartnerId = oneMessage.fromID
-        }*/
-        
+        // figure out who I can send a message to 
+        // since I can click on this message in the ChatTableViewController
+        // & open the the CHatLogTableViewCOntroller to bring up all messages in
+        // this "message thread"
         let IDMessageGoesTo = chatPartnerId
         
-        
+        // based on ID figure out who I am chatting with
+        // because when I transistion to the ChatLogTableViewCOntroller I can display
+        // that users name as the title
         let tempUserWrittingTo = searchForFireUserName(IDMessageGoesTo!)
         
         

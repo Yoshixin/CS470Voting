@@ -13,12 +13,15 @@ import Firebase
 
 class RegisterViewController: UIViewController {
     
+    // text fields to take in user input
     @IBOutlet weak var Username: UITextField! // aka nickName
     @IBOutlet weak var userEmail: UITextField!
     @IBOutlet weak var userPassword: UITextField!
     //2nd password is to verify user passwords match in register process
     @IBOutlet weak var userPasswordCheck: UITextField!
     
+    // a string to hold a message from our php script to tell 
+    // us if the pushing of data was successfull
     var responseString = NSString()
     
     
@@ -52,7 +55,8 @@ class RegisterViewController: UIViewController {
             DispatchQueue.main.async{self.displayMSG("Your email is not formated right!", "try again!" )}
         }
         
-        // check if passwords match
+        // check if passwords match & of right length
+        // firebase API requires user password to be of length 7
         if password != passwordCheck || (password?.characters.count)! < 7 {
             // display error message
             
@@ -66,8 +70,7 @@ class RegisterViewController: UIViewController {
         
         
         
-        //"https://www.cs.sonoma.edu/~kooshesh/cs470/tracks_human_readable.json"
-        
+        // attempt to push data onto mysql database
         // currently the php script to inseert data is on my blue account
         let request = NSMutableURLRequest(url: NSURL(string: "https://www.cs.sonoma.edu/~mogannam/registerPhpStoreData.php")! as URL)
         
@@ -105,9 +108,9 @@ class RegisterViewController: UIViewController {
 
             
             
-            print("\n\n data is : ", data)
-            print("\n \n response is :", response)
-            print("\n \n error is : ", error)
+            //print("\n\n data is : ", data)
+            print("\n \n response of registering is :", response)
+            //print("\n \n error is : ", error)
             
             // if the connection fails to even connect at all
             if error != nil {
@@ -115,9 +118,9 @@ class RegisterViewController: UIViewController {
                 return;
             }
             
-            print("\n\n\ndata: ",data!, "\n \n error: ", error)
+            //print("\n\n\ndata: ",data!, "\n \n error: ", error)
             
-            print("response: ", response ?? "**No response revievd**")
+            //print("response: ", response ?? "**No response revievd**")
             
             
             // converts what the php script sends back as "good" data to something swift can read (aka of type NSString )
@@ -134,7 +137,7 @@ class RegisterViewController: UIViewController {
             
             
             
-            print("responseString (1): ", responseString! ?? "**No, response recieved**")
+            ///print("responseString (1): ", responseString! ?? "**No, response recieved**")
             
             
             // if you successfully insert a new user into database
@@ -218,7 +221,7 @@ class RegisterViewController: UIViewController {
     }
     
     func matchRegExp(for regex: String, in text: String) -> [String] {
-        
+        // a email check done with regualr expression found on web
         do {
             let regex = try NSRegularExpression(pattern: regex) // turn your string into a regex data structure
             let nsString = text as NSString

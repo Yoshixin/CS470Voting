@@ -13,8 +13,9 @@ class categoriesTableVC: UITableViewController {
     //  a variable to hold original json data from script in case its needed in future
     var json = NSArray()
     
-    
-    var categories = [String]() //["Best Pic", "Best Artist"]
+    // an array of strings to populate the table cells
+    var categories = [String]()
+    // array of ids to track which category the user selected
     var categoryIds = [Int]()
     
     
@@ -22,11 +23,6 @@ class categoriesTableVC: UITableViewController {
         
         downloadCategories()
         super.viewDidLoad()
-        
-        
-        
-        
-        
         
     }
     
@@ -45,8 +41,7 @@ class categoriesTableVC: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
-        
-        
+        // determine how many categorys exist aka how many cells to create
         if  categories.count > 0{
             return categories.count
             
@@ -57,16 +52,17 @@ class categoriesTableVC: UITableViewController {
     
     // TODO :
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        // create our custom tableViewCells
         let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath)
         
+        // get a local copy of all the categories that exist
         let allCategories = categories
         
+        // populate the catehory data in the cell
         if let theCell = cell as? categoriesTableViewCell,
             let category = allCategories[indexPath.row] as? String  {
-            
-            
-            
-            
+            // get the category name
             
             theCell.useCategory(category)
            
@@ -101,7 +97,6 @@ class categoriesTableVC: UITableViewController {
                 // pass the current category to the next tableViewController, so we have access to the
                 // category
                 // The category name is used to look up all nominees in a category
-                
                 var aCategory = categories[indexPath.row]
                 var tempa = nTableVC.useCategory(aCategory)
                  nTableVC.useCategoryId(categoryId)
@@ -140,17 +135,11 @@ class categoriesTableVC: UITableViewController {
             // error will contain hopefully an error code/message that swift generates when the connection fails
             
             
-            
-            
             // check if the connection is even possible
             if error != nil {
                 print("\n error: ", error ?? "no error explenation given")
                 return;
             }
-            
-            
-            
-            
             
             // attempt to retrive data from database
             do {
@@ -162,7 +151,7 @@ class categoriesTableVC: UITableViewController {
                 
                 if let parseJson = self.json as? NSArray  { // unwrap json as an NSArray
                     // parjson will contain an array of Json Dictionaries
-                    // each dictionary represents 1 category stored on fatabase
+                    // each dictionary represents 1 category stored on database
                     
                     // loop through all categories.
                     for index in 0 ... parseJson.count - 1 {
@@ -177,16 +166,9 @@ class categoriesTableVC: UITableViewController {
                         self.categoryIds.append( tempId!)
                         self.categories.append( categoryName)
                         
-                        
-                        
                     }
                     
                     self.json = parseJson;
-                    
-                    
-                    
-                    
-                    
                     
                     print("in categoreisTableVc server done")
                     
@@ -216,60 +198,7 @@ class categoriesTableVC: UITableViewController {
         
         task.resume()
         
-        
-        
-        
     }
-    
-    
-    
-    
-    
-    
-    /*
-     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-     
-     // Configure the cell...
-     
-     return cell
-     }
-     */
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
     
     
     

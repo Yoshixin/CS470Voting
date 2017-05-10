@@ -8,17 +8,6 @@
 
 import UIKit
 
-// credentials from user
-
-
-
-
-
-
-
- 
-
-
 
 
 class LoginViewController: UIViewController {
@@ -28,7 +17,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var userPassword: UITextField!
     
     
-    // global variables to hold response/data from database
+    // local variables to hold response/data from database
     
     //var emailPulled = String() // used to store credentials pulled from database
     var passwordPulled = String() // to check against users inputed credentials
@@ -53,10 +42,6 @@ class LoginViewController: UIViewController {
     var isUserLoggedIn = false;
     
     
-    
-    
-    
-    
     // event handler for handleing when login button tapped
     @IBAction func LoginButtonTapped(_ sender: Any) {
         // handler for when loggin button pressed
@@ -65,7 +50,7 @@ class LoginViewController: UIViewController {
         
        
         
-        // credentials from user
+        //get credentials from user
          email = userEmail.text!
          password = userPassword.text!
         
@@ -134,7 +119,7 @@ class LoginViewController: UIViewController {
            // print("task: ",  URLSession.shared.dataTask(with: request as URLRequest) )
             //print("\n\n data: ", data)
             print("\n\n response: ", response)
-            print("\n\n initial error: ", error)
+            //print("\n\n initial error: ", error)
             
             
            
@@ -153,7 +138,7 @@ class LoginViewController: UIViewController {
                     self.resultValue = parseJson["status"] as! String
                     print("result of php script : ", self.resultValue )
                     
-                    print("\n ****\n", parseJson, "\n ****\n"  )
+                   // print("\n ****\n", parseJson, "\n ****\n"  )
                     
                     // if a user was found, but still need to verify password matches
                     if self.resultValue == "Success"{
@@ -166,7 +151,7 @@ class LoginViewController: UIViewController {
                        
                         
                         
-                        print("\n ****\n", self.queryResults, "\n ****\n"  )
+                        //print("\n ****\n", self.queryResults, "\n ****\n"  )
                         
                         // queryResults is an array of dictionaries, in this case it only ever has 1 element
                         // i just need the 1 dictionary
@@ -179,12 +164,14 @@ class LoginViewController: UIViewController {
                         let tempId = tempResults["account_id"] as! String;
                         self.nickname = tempResults["account_nickname"] as! String;
                         
-                        //set ptenitial current user data, you can't use this user unless they are logged in
-                        // b/c you don't know if the credentials are right yet
+                        //set potential current user data, 
+                        // you can't use this user  data yet. unless they are logged in
+                        // b/c you don't know if the credentials are right yet.
+                        // If the credential are wrong than the user will be forced to login again
+                        // and therfore these variables cleared out in the login proccess
                         loggedInUser.setValuesForKeys(tempResults as! [String : Any])
                        
-                        
-                        
+                        // an id matching the username saved on the DB
                         self.accountIdPulled  = Int(tempId)!
                         
                         self.json = parseJson;
@@ -198,7 +185,7 @@ class LoginViewController: UIViewController {
                     // if a record is not found the only valid data sent back will be the resultValue message
                     // in this case queryResults will not even exists
                     self.json = parseJson;
-                    self.resultValue = (parseJson["status"] as? String)!;
+                    //self.resultValue = (parseJson["status"] as? String)!;
                    
                     
                     
@@ -220,7 +207,7 @@ class LoginViewController: UIViewController {
                 return;
             }
             
-            // force the code to run on the main thread
+            // force the code to finish at same time as the main thread
             // check user inputed  credentials against pulled credentials
             DispatchQueue.main.async{self.check_credentials(email,password)}
             
@@ -257,13 +244,8 @@ class LoginViewController: UIViewController {
     func check_credentials(_ email : String, _ password : String){
 
         print("-- Checking credentials --")
-        print("result", self.resultValue)
-        print("\n\n json",self.json)
-        
-        
-        
-        print("++ +++", self.resultValue ,"++ ++")
-        
+       
+    
         
         if self.resultValue == "tryAgain"{ // user nor found at all, inform user & do nothing
             DispatchQueue.main.async { self.displayMSG("Username not Found, try again!", "Sorry")}
@@ -273,13 +255,14 @@ class LoginViewController: UIViewController {
         else{ // user found but should check password, assuming resultValue message is success
             if(!(email.isEmpty) && !(password.isEmpty)){
                 // if user entered both fields, we can check credentials if they match
-                
-                
+                // if they match the variable isUserLoggedIn will be changed to true
+                // and we can allow the login bellow
                 self.attemptLogin(email, password, self.emailPulled, self.passwordPulled, self.resultValue, self.accountIdPulled)
             }
             
         }
         
+        // allows login
         // initiate segue to home screen if login is valid
         if isUserLoggedIn {
             self.performSegue(withIdentifier: "LoginToHome", sender: self)
@@ -293,11 +276,7 @@ class LoginViewController: UIViewController {
                                         preferredStyle: UIAlertControllerStyle.alert)
         
         let okAction = UIAlertAction(title:"ok", style: UIAlertActionStyle.default, handler: nil);
-        
-        
         myAlert.addAction(okAction)
-        
-        
         self.present(myAlert, animated:true, completion: nil)
         
     }
@@ -308,7 +287,7 @@ class LoginViewController: UIViewController {
     func attemptLogin (_ theEmail: String, _ thePassword: String, _ theEmailPulled: String,
                        _ thePasswordPulled: String, _ theresultValue: String, _ theIdPulled : Int) {
         
-        print("-- email: ",theEmail, "|| password: ",  thePassword, "|| passwordPulled :", thePasswordPulled, " -- ")
+        //print("-- email: ",theEmail, "|| password: ",  thePassword, "|| passwordPulled :", thePasswordPulled, " -- ")
         
         // check for matching credentials
         if theEmail == theEmailPulled{
@@ -328,7 +307,7 @@ class LoginViewController: UIViewController {
                 loggedInUser.account_nickname = nickname
                 
                 
-                
+                // change the boolean var that screens if the user is allowed to login
                 logedInId =  theIdPulled
                 self.isUserLoggedIn = true
                 

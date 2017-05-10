@@ -56,7 +56,7 @@ class nomineeTableViewCell: UITableViewCell {
     
     
     
-   
+   /*
     // button to vote for user
     @IBAction func chooseNominee(_ sender: Any) {
         print("in button n id: ", chosenNomineeId )
@@ -193,14 +193,14 @@ class nomineeTableViewCell: UITableViewCell {
         
         
         
-    }
+    }*/
     
     
     func useNominee(_ nominee: String, _ nominee_id : Int ) {
         /*if let aImage = artist.getImage()  {
          cellImage.image = aImage
          }*/
-        
+        print("dbg in use nominee")
         chosenNomineeId = nominee_id
         
         nomineeName.text = nominee

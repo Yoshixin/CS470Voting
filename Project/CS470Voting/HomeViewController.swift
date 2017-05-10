@@ -22,8 +22,9 @@ class HomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     @IBAction func didTapSignoutTemp(_ sender: Any) {
         
-        
+        // transition to login page
         performSegue(withIdentifier: "signoutToLogin", sender: self)
+        // log out fireBaseUser
         gSignOut(loggedInUser)
     }
     
