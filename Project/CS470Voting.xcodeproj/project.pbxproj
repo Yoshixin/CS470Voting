@@ -18,6 +18,11 @@
 		3F30F3931E931DCB00E90631 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F30F3911E931DCB00E90631 /* LaunchScreen.storyboard */; };
 		3F30F39E1E931DCC00E90631 /* CS470VotingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30F39D1E931DCC00E90631 /* CS470VotingTests.swift */; };
 		3F30F3A91E931DCC00E90631 /* CS470VotingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30F3A81E931DCC00E90631 /* CS470VotingUITests.swift */; };
+		3FFEB2441EC2B66500FB70EC /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFEB23F1EC2B66500FB70EC /* CreateGroupViewController.swift */; };
+		3FFEB2451EC2B66500FB70EC /* GroupMembersViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFEB2401EC2B66500FB70EC /* GroupMembersViewCell.swift */; };
+		3FFEB2461EC2B66500FB70EC /* GroupMembersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFEB2411EC2B66500FB70EC /* GroupMembersViewController.swift */; };
+		3FFEB2471EC2B66500FB70EC /* GroupsWithButtonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFEB2421EC2B66500FB70EC /* GroupsWithButtonVC.swift */; };
+		3FFEB2481EC2B66500FB70EC /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFEB2431EC2B66500FB70EC /* GroupTableViewCell.swift */; };
 		5E1E8549BA41E220B21802D9 /* Pods_CS470Voting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36150CEABE0219E3EDF8E721 /* Pods_CS470Voting.framework */; };
 		6702245A1EBED6AB00C0E26C /* ChatTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670224591EBED6AB00C0E26C /* ChatTableVC.swift */; };
 		6702245C1EBEDD6F00C0E26C /* aFirebaseUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6702245B1EBEDD6F00C0E26C /* aFirebaseUser.swift */; };
@@ -71,6 +76,11 @@
 		3F30F3A41E931DCC00E90631 /* CS470VotingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CS470VotingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F30F3A81E931DCC00E90631 /* CS470VotingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CS470VotingUITests.swift; sourceTree = "<group>"; };
 		3F30F3AA1E931DCC00E90631 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3FFEB23F1EC2B66500FB70EC /* CreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateGroupViewController.swift; path = "../../../kevin/CS470Voting-GroupsServer/Project/CS470Voting/CreateGroupViewController.swift"; sourceTree = "<group>"; };
+		3FFEB2401EC2B66500FB70EC /* GroupMembersViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupMembersViewCell.swift; path = "../../../kevin/CS470Voting-GroupsServer/Project/CS470Voting/GroupMembersViewCell.swift"; sourceTree = "<group>"; };
+		3FFEB2411EC2B66500FB70EC /* GroupMembersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupMembersViewController.swift; path = "../../../kevin/CS470Voting-GroupsServer/Project/CS470Voting/GroupMembersViewController.swift"; sourceTree = "<group>"; };
+		3FFEB2421EC2B66500FB70EC /* GroupsWithButtonVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupsWithButtonVC.swift; path = "../../../kevin/CS470Voting-GroupsServer/Project/CS470Voting/GroupsWithButtonVC.swift"; sourceTree = "<group>"; };
+		3FFEB2431EC2B66500FB70EC /* GroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupTableViewCell.swift; path = "../../../kevin/CS470Voting-GroupsServer/Project/CS470Voting/GroupTableViewCell.swift"; sourceTree = "<group>"; };
 		4A6EB93D9EB280FFA90AA5BF /* Pods_CS470VotingUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CS470VotingUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		66A87E603B87932A71A991B4 /* Pods-CS470VotingUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CS470VotingUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CS470VotingUITests/Pods-CS470VotingUITests.release.xcconfig"; sourceTree = "<group>"; };
 		670224591EBED6AB00C0E26C /* ChatTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableVC.swift; sourceTree = "<group>"; };
@@ -148,6 +158,7 @@
 		3F30F3841E931DCB00E90631 /* CS470Voting */ = {
 			isa = PBXGroup;
 			children = (
+				3FFEB23E1EC2B64900FB70EC /* Groups */,
 				6702245F1EBF04D300C0E26C /* ChatFiles */,
 				67C2719E1EBE3CDF004317D2 /* ObjectOrientedDataStruct */,
 				67C2719D1EBE3C4B004317D2 /* TableViewCell */,
@@ -179,6 +190,18 @@
 				3F30F3AA1E931DCC00E90631 /* Info.plist */,
 			);
 			path = CS470VotingUITests;
+			sourceTree = "<group>";
+		};
+		3FFEB23E1EC2B64900FB70EC /* Groups */ = {
+			isa = PBXGroup;
+			children = (
+				3FFEB23F1EC2B66500FB70EC /* CreateGroupViewController.swift */,
+				3FFEB2401EC2B66500FB70EC /* GroupMembersViewCell.swift */,
+				3FFEB2411EC2B66500FB70EC /* GroupMembersViewController.swift */,
+				3FFEB2421EC2B66500FB70EC /* GroupsWithButtonVC.swift */,
+				3FFEB2431EC2B66500FB70EC /* GroupTableViewCell.swift */,
+			);
+			name = Groups;
 			sourceTree = "<group>";
 		};
 		6702245F1EBF04D300C0E26C /* ChatFiles */ = {
@@ -530,6 +553,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FFEB2451EC2B66500FB70EC /* GroupMembersViewCell.swift in Sources */,
+				3FFEB2461EC2B66500FB70EC /* GroupMembersViewController.swift in Sources */,
 				6702245E1EBEE34100C0E26C /* NewMessageTableVC.swift in Sources */,
 				6749BDE01EA84D2500F0D94B /* RegisterViewController.swift in Sources */,
 				670224631EBF05A900C0E26C /* ChatLogTableVC.swift in Sources */,
@@ -538,6 +563,8 @@
 				67CD0BC21EA6FE76003C75F3 /* nomineeTableVC.swift in Sources */,
 				3F30F3881E931DCB00E90631 /* HomeViewController.swift in Sources */,
 				3F0F2D891EA587E8005AD45A /* categoriesTableVC.swift in Sources */,
+				3FFEB2481EC2B66500FB70EC /* GroupTableViewCell.swift in Sources */,
+				3FFEB2471EC2B66500FB70EC /* GroupsWithButtonVC.swift in Sources */,
 				67C271A01EBE3D1A004317D2 /* aUser.swift in Sources */,
 				677CA3191EC009DA009FF3CA /* ChatMessageCollectionCell.swift in Sources */,
 				67F48F431EA846CF002B05FA /* PreLoginViewController.swift in Sources */,
@@ -547,6 +574,7 @@
 				6749BDE21EA8630D00F0D94B /* LoginViewController.swift in Sources */,
 				3F30F38E1E931DCB00E90631 /* CS470Voting.xcdatamodeld in Sources */,
 				67C271A21EBE3DBD004317D2 /* GlobalFuncvar.swift in Sources */,
+				3FFEB2441EC2B66500FB70EC /* CreateGroupViewController.swift in Sources */,
 				6702245A1EBED6AB00C0E26C /* ChatTableVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
