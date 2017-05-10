@@ -28,7 +28,7 @@
         <!--Welcome!-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Welcome!" id="BYZ-38-t0r" customClass="HomeViewController" customModule="CS470Voting" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Home" title="Welcome!" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="HomeViewController" customModule="CS470Voting" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -592,7 +592,7 @@
         <!--All Groups-->
         <scene sceneID="LK1-3t-5Qj">
             <objects>
-                <viewController title="All Groups" id="Oiv-k8-PI3" customClass="GroupsWithButtonVC" customModule="CS470Voting" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GroupsWithButtonVC" title="All Groups" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Oiv-k8-PI3" customClass="GroupsWithButtonVC" customModule="CS470Voting" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iAS-ey-izb"/>
                         <viewControllerLayoutGuide type="bottom" id="eni-m0-RrL"/>
