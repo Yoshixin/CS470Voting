@@ -227,9 +227,11 @@ class ChatTableVC: UITableViewController {
         let tempUserWrittingTo = searchForFireUserName(IDMessageGoesTo!)
         
         
+        //converte the firebase time stamp on the message to something more human readable
+        // basically the date is originally a number of the seconds from the year 1970 occured
+        // so we need to convert that  to hh:mm:ss
         if let seconds = oneMessage.timeSTamp.doubleValue as? Double{
             let convertDate = NSDate(timeIntervalSince1970: seconds)
-            
             
             let myformatedDate = DateFormatter()
             myformatedDate.dateFormat = "hh:mm:ss a"
@@ -237,7 +239,8 @@ class ChatTableVC: UITableViewController {
         }
         // finish add a time label
         
-        
+        // set the main cell label text to user you are messaging with
+        // than set the sub label of the cell to the message
         cell.textLabel?.text = tempUserWrittingTo?.account_nickname
         cell.detailTextLabel?.text = oneMessage.text
         
@@ -245,13 +248,11 @@ class ChatTableVC: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // handles changing to the chatLogTableVC when a cell is tapped
+        // aka the message thread between yourself and one other user
         
-        
-        // get curent messagfrom cell
+        // get curent messag from this cell on chatTableViewController
         let currentMessage = allMessages[indexPath.row]
-        
-        
-        
         
         
         // get an id from the message to look up
@@ -259,28 +260,32 @@ class ChatTableVC: UITableViewController {
             return // else exit b/c it failed to get an id
         }
      
-        // use the id from the message  to get all user data for this one id
-        // currently we only have user ids
+        // use the id from the message  to get a user to chat with for this one id
+        // currently we only have user ids -> but we want everything from firebase
+        // we want user's: email, id, nick_name
+        // we get this data from the accounts table
         let ref = FIRDatabase.database().reference().child("accounts").child(chatPartnerId)
         
-        // pull users from firebase
+        // pull user you are chatting with in this cell from firebase accounts table
         ref.observe(.value, with: { (getAllUsers) in
             
-            //print(getAllUsers.value)
+            
             
             // converte pulled user data object to dictionary
             guard let allUsersDict = getAllUsers.value as? [String : AnyObject] else{
                 return // return is casting to ict fails
             }
             
-            // creat the user from the dictionary
+            // creat the FirebaseUser from the dictionary
             let tempUser = aFirebaseUser()
             tempUser.setValuesForKeys(allUsersDict)
             tempUser.account_id = chatPartnerId
             
-            // transition to chatLogTableView with this user pulled from Firebase DB
+            // transition to chatLogTableView with this FirebaseUser pulled from Firebase DB
             let TempChatLogController = self.storyboard?.instantiateViewController(withIdentifier: "chatLogStoryBoardID")  as!ChatLogTableVC
-             TempChatLogController.setWhoToWriteTo(tempUser)
+             TempChatLogController.setWhoToWriteTo(tempUser) // set the user for the next controller -> aka ChatLogTableVC
+            
+            // transition to ChatLogTableVC and display message thread for this user and you
              self.navigationController?.pushViewController(TempChatLogController ,animated: true)
 
             
@@ -299,11 +304,9 @@ class ChatTableVC: UITableViewController {
     
     
     func segueChatToChatLog() { // aka showChatController
-       /* let chatLogController = ChatLogTableVC(collectionViewLayout: UICollectionViewFlowLayout())
-        //navigationController?.pushViewController(chatLogController, animated: true)
-        navigationController?.show(chatLogController, sender: self)*/
-        
-
+        // I don't think this is used anymore
+        // but it can tranition from the ChatTableVC to the ChatLogTableVC
+    
         let TempChatLogController = storyboard?.instantiateViewController(withIdentifier: "chatLogStoryBoardID")  as!ChatLogTableVC
         TempChatLogController.setWhoToWriteTo(FireBaseUser)
         self.navigationController?.pushViewController(TempChatLogController ,animated: true)
@@ -315,6 +318,8 @@ class ChatTableVC: UITableViewController {
     }
     
     func handleNewMessage() {
+        // handles transitioning from the ChatTableVC to NewMessageTableVC
+        // when the "pen button" is pressed
         
         //let newMsgController = NewMessageTableVC()
         // done to give the NewMessageTableVC controller access
@@ -344,64 +349,18 @@ class ChatTableVC: UITableViewController {
     
     
     func setLogedInuser(_ theUser : aUser){
-        
+        // don't think this is used anymore
         loggedInUser = theUser
     }
 
     func setChatControllerTitle (_ theUser: aUser){
+        // don't think this is used anymore
         self.title = theUser.account_nickname
     }
 
 
 }
 
-
-// old method maybe not needed b/c we fixed a bug described above
-
-/*
- 
- 
- func observeMessages(){
- let messgaeRefrence = FIRDatabase.database().reference().child("messages")
- 
- messgaeRefrence.observe(.childAdded, with: { (amessagePulled) in
- 
- if let myMessageDict = amessagePulled.value as? [String: AnyObject]{
- 
- let myMessage = aMessageObject()
- 
- myMessage.setValuesForKeys(myMessageDict)
- //self.allMessages.append(myMessage)
- self.allMessagesDict[myMessage.toWriteTo] = myMessage
- 
- // reconstruct array anytime you change the dictionary
- self.allMessages = Array(self.allMessagesDict.values)
- self.allMessages.sort(by: {  (message1 , message2) -> Bool in
- //some code
- return message1.timeSTamp.intValue > message2.timeSTamp.intValue
- 
- })
- 
- 
- //print("observing a message ", myMessage.text)
- 
- DispatchQueue.main.async{
- self.tableView.reloadData()}
- 
- }
- 
- }, withCancel: nil)
- 
- }
- 
- 
- 
- 
- 
- }
-
- 
- */
 
 
 

@@ -11,24 +11,12 @@ import UIKit
 class NewMessageTableVC: UITableViewController {
     let cellID = "NewMsgCellID"
    
-    
+   // hold a user who we chat with when a cell in this view is clicked
     var userToWriteTo = aFirebaseUser()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        
-        //allFireUsersPulled = [aFirebaseUser]()
-        //gFetchAllFirebaseUsers(selfSender: self)
-        
-        
-        
-       
-        
         
         
        
@@ -56,12 +44,16 @@ class NewMessageTableVC: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        // loads all the possible users I can chat with from the global array allFireUsersPulled
+        // this is set in the previous view ChatTableVC
         
-        // NOTE IM NOT USING MY OWN CELL CLASS HERE
+        // NOTE IM NOT USING MY OWN CELL FILE HER, I build it programatically here
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellID)
         
+        // pull one user per cell to display in the cell
         let tempFireUser = allFireUsersPulled[indexPath.row]
+        
+        // set cell data
         cell.textLabel?.text = tempFireUser.account_nickname
         cell.detailTextLabel?.text = tempFireUser.account_email
         
@@ -73,39 +65,25 @@ class NewMessageTableVC: UITableViewController {
     //var chatController: ChatTableVC?
     
    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        /*dismiss(animated: true) { // original tutorial code dosent work
-            //self.chatController?.segueChatToChatLog()
-            //self.navigationController?.pushViewController(self.chatController!, //animated: true)
-            
-            //self.performSegue(withIdentifier: "newMsgToChatLog", sender: self)
-        }*/
+            // when user clicks on a cell they decided who they wanted to create a new message thread with
     
+    
+        // set who to creat a new ChatLogTableVC for
         userToWriteTo = allFireUsersPulled[indexPath.row]
-        print("in new message user to write to \(userToWriteTo.account_nickname) | looked ", allFireUsersPulled[indexPath.row].account_nickname )
+        //print("in new message user to write to \(userToWriteTo.account_nickname) | looked ", allFireUsersPulled[indexPath.row].account_nickname )
         //self.performSegue(withIdentifier: "newMsgToChatLog", sender: self) // old code I wrote delete
     
-    
+        // get an instance of the ChatLogTableVC to transition to
         let TempChatLogController = storyboard?.instantiateViewController(withIdentifier: "chatLogStoryBoardID")  as!ChatLogTableVC
+    
+        // set the variable of who you are chating with in the ChatLogTableVC
         TempChatLogController.setWhoToWriteTo(userToWriteTo)
+        // transition to the new ChatLogTableVC view
         self.navigationController?.pushViewController(TempChatLogController ,animated: true)
     
     
     }
     
-   /* override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "newMsgToChatLog"{
-            let TempChatLogController = storyboard?.instantiateViewController(withIdentifier: "chatLogStoryBoardID")  as!ChatLogTableVC
-            
-            
-            TempChatLogController.setWhoToWriteTo(userToWriteTo)
-        }
 
-        
-        
-        
-    }*/
-    
 
 }

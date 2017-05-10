@@ -18,15 +18,14 @@ class ChatLogTableVC: UICollectionViewController, UITextFieldDelegate, UICollect
     
     
     
-    // THIS CONTROLLER WON'T SHOW UP ON STORYBOARD AT ALL
-    // Also this is not a TableViewController b/c you can't pin a sub view to the bottom of
+    // THIS IS NOT A  TableViewController B?C YOU CAN't pin sub View to the bottom of
     // a table view controller
     // So instead u need to use a UICollectionViewController and simulate a table view controller
     // by adding a TableViewController into this view & pin the button view (aka collectionView in code)
     // at bottom of UICollectionViewController
     
     
-    // this function acts like a getter function that can get the inputed text for
+    // this function acts like a constructor to creat a custom textField
     // the handleSendButton function
     // this format of code is called a class property
     // also lazy var --> gives you acces to self when you dont have it
