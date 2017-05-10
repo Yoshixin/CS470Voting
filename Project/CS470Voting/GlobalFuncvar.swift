@@ -31,9 +31,7 @@ var FireBaseUser = aFirebaseUser()
 // an array used by the chat application to hold all potential users we can chat with
 var allFireUsersPulled = [aFirebaseUser]()
 
-
 let dbg = true
-
 
 func gFetchAllFirebaseUsers(selfSender :Any){
     // fetch all firebase users from the accounts table
@@ -53,7 +51,6 @@ func gFetchAllFirebaseUsers(selfSender :Any){
             
         }
     }, withCancel: nil)
-
     
 }
 

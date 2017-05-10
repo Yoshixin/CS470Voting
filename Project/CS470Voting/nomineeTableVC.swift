@@ -23,7 +23,7 @@ class nomineeTableVC: UITableViewController {
     var allNominees : Dictionary<Int, Array<String>> = [:]
     var allNomineesIds : Dictionary<Int, Array<Int>> = [:]
 
-    // used to track whichnominees where voted for in a given category
+    // used to track which nominees were voted for in a given category
     // is a dictionary who's key is the categoryID & value is an index 
     // to which column (aka which cell) was selected in the voting proccess
     var selectedNominesPerCategory : Dictionary<Int, Int> = [:]
@@ -47,7 +47,7 @@ class nomineeTableVC: UITableViewController {
     // a swift function that can execute code when the cell is tapped
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        // get an array of all nominees fro the given category from a dictionary
+        // get an array of all nominees from the given category from a dictionary
         // of nominee arrays. CategoryID used to index dictionary and get array
         let nomineesIds = allNomineesIds[chosenCategoryId]
         
@@ -61,23 +61,17 @@ class nomineeTableVC: UITableViewController {
         // a script that will be used to save the user votes
         let url =  "https://www.cs.sonoma.edu/~mogannam/chooseNominee.php"
         
-        
-        
         let postString = "account_id=\(logedInId)&category_id=\(chosenCategoryId)&nominee_id=\(chosenNomineeId)"
         print(postString)
         
         // currently the php script to inseert data is on my blue account
         let request = NSMutableURLRequest(url: NSURL(string: url)! as URL)
         
-        
         // bundle up data needed by script in POST method
         request.httpMethod = "POST"
-   
-        
-        
+     
         // actually bundeling up done
         request.httpBody = postString.data(using: String.Encoding.utf8)
-        
         
         // handles highlighting the cell for the nominee the user voted for
         // if a cell is already highlighted check if we need to highlight a differnet
@@ -93,7 +87,6 @@ class nomineeTableVC: UITableViewController {
             self.highlightedIndexPath = indexPath
             let cell = tableView.cellForRow(at: indexPath)
             cell?.backgroundColor = UIColor.green
-            
         }
         else {
             // user hasn't voted yet so we just need to highlight the cell
@@ -105,9 +98,7 @@ class nomineeTableVC: UITableViewController {
             cell?.backgroundColor = UIColor.green
             self.highlightedIndexPath = indexPath
             }
-            
         }
-        
         // cast the vote to the database
         // ++++ Waring start of threading ++++
         let task = URLSession.shared.dataTask(with: request as URLRequest){
@@ -116,29 +107,18 @@ class nomineeTableVC: UITableViewController {
             // my basic understanding is: data contains the response the script outputs back to swift,
             // response is used by swift to generate message based on what happens when communication with the script,
             // error will contain hopefully an error code/message that swift generates when the connection fails
-            
-           
-            
-            
+          
             // check if the connection is even possible
             if error != nil {
                 print("\n error: ", error ?? "no error explenation given")
                 return;
             }
-            
-            
             var responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-            
-            
             // attempt to cast vote
             do {
-                
-       
-                
-                var json = data//(try JSONSerialization.jsonObject(with: data!, //options: .mutableContainers) as? NSString)!
-            
 
-                //print(responseString)
+                var json = data//(try JSONSerialization.jsonObject(with: data!, //options: .mutableContainers) as? NSString)!
+
                 print("vote response message", responseString!)
                 // the server includes  extra qoutation marks in the string of responseString
                 // so for string comparison we need to include them when comparing
@@ -190,17 +170,9 @@ class nomineeTableVC: UITableViewController {
             }
             
         }
-        
-        
-        
+
         task.resume()
-        
-        
-        
-        
     }
-    
- 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -229,13 +201,10 @@ class nomineeTableVC: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        
         // get an array of nomines from our dictionary by using the category id 
         // chosen by the user as the key
         let someNominees = allNominees[chosenCategoryId]
@@ -244,13 +213,8 @@ class nomineeTableVC: UITableViewController {
         if someNominees != nil{ // make sure the category exists in our dictionary of categories
             if (someNominees?.count)! > 0 { // get the number of nominees in this one category
                 return (someNominees?.count)!
-                
             }
         }
-        
-        
-        
-        
         return 0
     }
     
@@ -260,9 +224,7 @@ class nomineeTableVC: UITableViewController {
         
         // create a generic reusable tableViewCell
         var cell = tableView.dequeueReusableCell(withIdentifier: "nomineeCell", for: indexPath)
-        
-   
-        
+
         // cast the genric cell to a nomineeTableViewCell so we cal populat the cell
         // with data
         if let theCell = cell as? nomineeTableViewCell {
@@ -330,7 +292,6 @@ class nomineeTableVC: UITableViewController {
         // actually bundeling up done
         request.httpBody = postString.data(using: String.Encoding.utf8)
         
-        
         let task = URLSession.shared.dataTask(with: request as URLRequest) {
             data, response, error in
             // I believe this let structure is using the format of "completion handler"
@@ -346,7 +307,6 @@ class nomineeTableVC: UITableViewController {
                 print("\n error: ", error ?? "no error explenation given")
                 return;
             }
-            
             // attempt to retrive data from database
             do {
                 
@@ -383,7 +343,6 @@ class nomineeTableVC: UITableViewController {
                         print("tempData :",tempData)
                         print("pareJson[0]",  parseJson[0] )
                         print("dbg 1")
-                       
                         
                         // get the id of the nominee voted for
                         var tempNomineeId = tempData["nominee_id"] as! String
@@ -410,11 +369,7 @@ class nomineeTableVC: UITableViewController {
                     }
                     
                     json = parseJson; // probaly not needed anymore
-                    
-                   
-                    
                 }
-                
                 // *** Important Code ****
                 // this code is needed to update the table view controller
                 // since this code runs on its own thread, there is potential of the
@@ -424,18 +379,13 @@ class nomineeTableVC: UITableViewController {
                     self.tableView.reloadData()
                 })
                 // *** ***** ********
-                
             }
             catch let caughtError as NSError {
                 print("caught error: ", caughtError)
                 return;
             }
-            
-        }
-        
+        }        
         task.resume()
-        
-        
     }
     
     
