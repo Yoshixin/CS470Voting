@@ -93,6 +93,7 @@ class MyVotesTableVC: UITableViewController {
                             let nomineeName = tempData["nominee_name"] as! String
                             self.categories.append( categoryName)
                             self.nominees.append( nomineeName)
+                            //
                         }
                     }
                 }
