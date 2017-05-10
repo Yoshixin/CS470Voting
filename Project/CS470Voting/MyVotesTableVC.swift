@@ -23,8 +23,9 @@ class MyVotesTableVC: UITableViewController {
     var nominees = [String]()
     
     override func viewDidLoad() {
-        downloadVotedNominees()
+        
         super.viewDidLoad()
+        downloadVotedNominees()
         
     }
     override func didReceiveMemoryWarning() {
@@ -58,12 +59,15 @@ class MyVotesTableVC: UITableViewController {
     func downloadVotedNominees() {
         // handles pulling the data the nominee already for
         // currently the php script to inseert data is on my blue account
+        
         let request = NSMutableURLRequest(url: NSURL(string: "https://www.cs.sonoma.edu/~mogannam/myVotes.php")! as URL)
         // bundle up data needed by script in POST method
         request.httpMethod = "POST"
         // I dont belive the php script uses the category_id anymore since we changed the script
         // to always pull all data
         // account_id, category_id, nomine_id
+        
+        print("logedInId,", logedInId)
         let postString = "account_id=\(logedInId)"
         // actually bundling up done
         request.httpBody = postString.data(using: String.Encoding.utf8)
@@ -82,12 +86,16 @@ class MyVotesTableVC: UITableViewController {
             // attempt to retrive data from database
             do {
                 // convert the data response from php script to json array
+                
+                print("data size", data?.count)
                 var json = (try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSArray)!
-                if let parseJson = json as? NSDictionary  { // unwrap json as an NSArray
+                if let parseJson = json as? NSArray  { // unwrap json as an NSArray
                     
-                    if(parseJson.count >= 1){ // check if nominee casted a vote yet for this caregory if so you
+                    
+                    for index in 0 ... parseJson.count - 1 {
+                        
                         // can't parse anything back from the php script
-                        if let tempData = parseJson[0 ] as? NSDictionary {
+                        if let tempData = parseJson[index ] as? NSDictionary {
                             // get the data from the dictionary
                             let categoryName = tempData["category_name"] as! String
                             let nomineeName = tempData["nominee_name"] as! String
@@ -95,6 +103,7 @@ class MyVotesTableVC: UITableViewController {
                             self.nominees.append( nomineeName)
                             //
                         }
+                        
                     }
                 }
                 // *** Important Code ****
@@ -105,6 +114,7 @@ class MyVotesTableVC: UITableViewController {
                 DispatchQueue.main.async(execute: {
                     self.tableView.reloadData()
                 })
+                
                 // *** ***** ********
             }
             catch let caughtError as NSError {
@@ -114,4 +124,6 @@ class MyVotesTableVC: UITableViewController {
         }        
         task.resume()
     }
+    
+    
 }
