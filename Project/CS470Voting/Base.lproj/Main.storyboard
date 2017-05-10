@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rtF-lA-0U2">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rtF-lA-0U2">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -661,7 +661,7 @@
         <!--Group Members-->
         <scene sceneID="0fy-aD-T7u">
             <objects>
-                <viewController title="Group Members" id="KRe-h9-ckC" customClass="GroupMembersViewController" customModule="CS470Voting" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GroupsTableVC" title="Group Members" id="KRe-h9-ckC" customClass="GroupMembersViewController" customModule="CS470Voting" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="roL-na-Lbi"/>
                         <viewControllerLayoutGuide type="bottom" id="qYE-kp-9P1"/>

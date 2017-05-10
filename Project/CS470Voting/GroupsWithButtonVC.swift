@@ -27,17 +27,19 @@ class GroupsWithButtonVC: UIViewController, UITableViewDataSource, UITableViewDe
     //var dummyGroups = [String]() //dummy variable for testing, delete
     // relpace this with groups[String] when done
     
-    override func viewDidAppear(_ animated: Bool)
+    /*override func viewDidAppear(_ animated: Bool)
     {
-        super.viewDidLoad()
+        super.viewDidAppear(_animated)
         
         self.grouptableview.reloadData()
-    }
+    } */
     
     override func viewDidLoad() {
         self.navigationItem.hidesBackButton = true
-        let newBackButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(transitionBack) )
+        let newBackButton = UIBarButtonItem(title: "Home", style: .plain, target: self, action: #selector(transitionBack) )
         self.navigationItem.leftBarButtonItem = newBackButton
+        
+        var selectedGroup = -1
         
         grouptableview.delegate = self
         grouptableview.dataSource = self
@@ -68,6 +70,17 @@ class GroupsWithButtonVC: UIViewController, UITableViewDataSource, UITableViewDe
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showAGroup" {
+            let tempGroupController = self.storyboard?.instantiateViewController(withIdentifier: "GroupsTableVC")  as! GroupMembersViewController
+            //tempGroupController.setgroupID(_newID: selectedGroup)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //selectedGroup = indexPath.row
+        
+    }
     
     /* Functions for searching */
     func updateSearchResultsForSearchController(searchController: UISearchController) {

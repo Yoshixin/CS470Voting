@@ -12,7 +12,12 @@ class GroupMembersViewController: UIViewController, UITableViewDataSource, UITab
     
     @IBOutlet weak var tableview: UITableView!
     
-    //variables for handling all groups
+    //  a variable to hold original json data from script in case its needed in future
+    var json = NSArray()
+    
+    var groupID = -1
+    
+    //variables for handling all members
     var members = [String]()
     var memberIds = [Int]()
     
@@ -22,11 +27,17 @@ class GroupMembersViewController: UIViewController, UITableViewDataSource, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        downloadMembers()
+        
         // Do any additional setup after loading the view.
         tableview.delegate = self
         tableview.dataSource = self
         
         dummyMems = ["1","2","3","A Real Boy"]
+    }
+    
+    func setgroupID(_newID: Int) {
+        groupID = _newID
     }
     
     override func didReceiveMemoryWarning() {
@@ -89,5 +100,78 @@ class GroupMembersViewController: UIViewController, UITableViewDataSource, UITab
      
      }
      */
+    
+    func downloadMembers()  {
+        
+        // currently the php script to inseert data is on my blue account
+        let request = NSMutableURLRequest(url: NSURL(string: "https://www.cs.sonoma.edu/~mogannam/membersOfGroups.php")! as URL)
+        
+        // bundle up data needed by script in POST method
+        request.httpMethod = "POST"
+        //we don't need to send any parameters for this php script, so leave post string empty
+        let postString = ""
+        
+        // actually bundeling up done
+        request.httpBody = postString.data(using: String.Encoding.utf8)
+        
+        // ++++ Waring start of threading ++++
+        let task = URLSession.shared.dataTask(with: request as URLRequest){
+            data, response, error in
+            // I believe this let structure is using the format of "completion handler"
+            // my basic understanding is: data contains the response the script outputs back to swift,
+            // response is used by swift to generate message based on what happens when communication with the script,
+            // error will contain hopefully an error code/message that swift generates when the connection fails
+            
+            // check if the connection is even possible
+            if error != nil {
+                print("\n error: ", error ?? "no error explenation given")
+                return;
+            }
+            
+            // attempt to retrive data from database
+            do {
+                
+                // converte the data response from php script to json array
+                self.json = (try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSArray)!
+               
+                if let parseJson = self.json as? NSArray  { // unwrap json as an NSArray
+                    // parjson will contain an array of Json Dictionaries
+                    // each dictionary represents 1 category stored on fatabase
+                    // loop through all categories.
+                    for index in 0 ... parseJson.count - 1 {
+                        var tempData = parseJson[index] as! NSDictionary
+                       
+                        // get the category name as a string
+                        var memberName = tempData["account_nickname"] as! String
+                        var memberId = tempData["account_id"] as! String
+                        var tempId = Int(memberId)
+                        self.memberIds.append( tempId!)
+                        self.members.append( memberName)
+                    }
+                    
+                    self.json = parseJson;
+                    
+                    print(self.members)
+                    print("server done")
+                    
+                }
+             
+                // *** Important Code ****
+                // this code is needed to update the table view controller
+                // since this code runs on its own thread, there is potential of the
+                // view controller loading before the data was even donloaded resulting in an empty view controller
+                // So at the end of the download we need the view controller to update itself
+                DispatchQueue.main.async(execute: {
+                    self.tableview.reloadData()
+                })
+            }
+            catch let caughtError as NSError {
+                print("caught error: ", caughtError)
+                return;
+            }
+        }
+        task.resume()
+  
+    }
     
 }

@@ -42,7 +42,7 @@ class ChatLogTableVC: UICollectionViewController, UITextFieldDelegate, UICollect
     }()
 
     override func viewDidLoad() {
-        super.viewDidLoad()
+        
         
         
         
@@ -74,6 +74,8 @@ class ChatLogTableVC: UICollectionViewController, UITextFieldDelegate, UICollect
         
         // get one users messages for this chat log controller
         observeAllUsersMsgs()
+        
+        super.viewDidLoad()
         
         
     

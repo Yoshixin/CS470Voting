@@ -127,6 +127,7 @@ class CreateGroupViewController: UIViewController {
                                         preferredStyle: UIAlertControllerStyle.alert)
         
         let okAction = UIAlertAction(title:"Okay", style: UIAlertActionStyle.default, handler: { action in
+            
             let tempGroupCOntroller = self.storyboard?.instantiateViewController(withIdentifier: "GroupsWithButtonVC")  as! GroupsWithButtonVC
             
             
