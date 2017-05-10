@@ -97,11 +97,12 @@ class MyVotesTableVC: UITableViewController {
                         // can't parse anything back from the php script
                         if let tempData = parseJson[index ] as? NSDictionary {
                             // get the data from the dictionary
-                            let categoryName = tempData["category_name"] as! String
-                            let nomineeName = tempData["nominee_name"] as! String
+                            if let categoryName = tempData["category_name"] as? String,
+                                let nomineeName = tempData["nominee_name"] as? String {
                             self.categories.append( categoryName)
                             self.nominees.append( nomineeName)
-                            //
+                            }
+                            
                         }
                         
                     }
