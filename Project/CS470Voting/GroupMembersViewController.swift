@@ -21,9 +21,6 @@ class GroupMembersViewController: UIViewController, UITableViewDataSource, UITab
     var members = [String]()
     var memberIds = [Int]()
     
-    var dummyMems = [String]() //dummy variable for testing, delete
-    // replace with members[string] later
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,8 +29,6 @@ class GroupMembersViewController: UIViewController, UITableViewDataSource, UITab
         // Do any additional setup after loading the view.
         tableview.delegate = self
         tableview.dataSource = self
-        
-        dummyMems = ["1","2","3","A Real Boy"]
     }
     
     func setgroupID(_newID: Int) {
@@ -47,39 +42,82 @@ class GroupMembersViewController: UIViewController, UITableViewDataSource, UITab
     
     @IBAction func didTapJoinButton(_ sender: UIButton) {
         print("Tapped the join button.")
-        //If joining the group
-        let myAlert = UIAlertController(title:"Group Joined!", message: "You are now a member of this group",
-                                        preferredStyle: UIAlertControllerStyle.alert)
-        let okAction = UIAlertAction(title:"ok", style: UIAlertActionStyle.default, handler: nil);
-        myAlert.addAction(okAction)
-        self.present(myAlert, animated:true, completion: nil)
-        //Script to join group goes HERE
         
-        //If leaving the group
-        /*
-         let myAlert = UIAlertController(title:"Group Left!", message: "You are no longer a member of this group",
-         preferredStyle: UIAlertControllerStyle.alert)
-         let okAction = UIAlertAction(title:"ok", style: UIAlertActionStyle.default, handler: nil);
-         myAlert.addAction(okAction)
-         self.present(myAlert, animated:true, completion: nil)
-         //Script to leave group goes HERE
-         */
+        // a script that will be used to save the user votes
+        let url =  "https://www.cs.sonoma.edu/~mogannam/joinGroup.php"
+        
+        let postString = "group_id=\(groupID)&account_id=\(logedInId)"
+        print(postString)
+        
+        // currently the php script to inseert data is on my blue account
+        let request = NSMutableURLRequest(url: NSURL(string: url)! as URL)
+        
+        // bundle up data needed by script in POST method
+        request.httpMethod = "POST"
+        
+        // actually bundeling up done
+        request.httpBody = postString.data(using: String.Encoding.utf8)
+        // cast the vote to the database
+        // ++++ Waring start of threading ++++
+        let task = URLSession.shared.dataTask(with: request as URLRequest){
+            data, response, error in
+            // I believe this let structure is using the format of "completion handler"
+            // my basic understanding is: data contains the response the script outputs back to swift,
+            // response is used by swift to generate message based on what happens when communication with the script,
+            // error will contain hopefully an error code/message that swift generates when the connection fails
+            
+            // check if the connection is even possible
+            if error != nil {
+                print("\n error: ", error ?? "no error explenation given")
+                return;
+            }
+            let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+            // attempt to cast vote
+            do {
+                let json = data//(try JSONSerialization.jsonObject(with: data!, //options: .mutableContainers) as? NSString)!
+                print("vote response message", responseString!)
+                // the server includes  extra qoutation marks in the string of responseString
+                // so for string comparison we need to include them when comparing
+
+                if responseString == "\"success\"" {
+                    // let user know they joined
+                    DispatchQueue.main.async(execute: {
+                        gDisplayMSG( myMessage: "You are now a member of this group",  myTitle: "Group joined!", sendSelf : self )
+                    })
+                }// let user know they were in group
+                else if(responseString == "\"succesfully replace\""){
+                    DispatchQueue.main.async(execute: {
+                        gDisplayMSG( myMessage: "You're already a member of this group",  myTitle: "Note:", sendSelf : self )
+                    })
+                }// an error occured let user know
+                else {
+                    DispatchQueue.main.async(execute: {
+                        gDisplayMSG( myMessage: "Try joining again.",  myTitle: "Sorry, an Error ocured", sendSelf : self )
+                    })
+                }
+                self.tableview.reloadData()
+                globalPushFunctionMsg =  "No string from php"
+            }
+            catch let caughtError as NSError {
+                print("caught error: ", caughtError)
+                return;
+            }
+        }
+        task.resume()
+
         
     }
     
     //Table view data sources
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning using dummy values
-        
-        return dummyMems.count
+        return members.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // #warning using dummy values
         let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell", for: indexPath)
         
         //let allGroups = groups
-        let allMembers = dummyMems
+        let allMembers = members
         var member = ""
         
         if let theCell = cell as? GroupMembersViewCell {
@@ -102,15 +140,13 @@ class GroupMembersViewController: UIViewController, UITableViewDataSource, UITab
      */
     
     func downloadMembers()  {
-        
         // currently the php script to inseert data is on my blue account
-        let request = NSMutableURLRequest(url: NSURL(string: "https://www.cs.sonoma.edu/~mogannam/membersOfGroups.php")! as URL)
+        let request = NSMutableURLRequest(url: NSURL(string: "https://www.cs.sonoma.edu/~mogannam/membersOfGroup.php")! as URL)
         
         // bundle up data needed by script in POST method
         request.httpMethod = "POST"
         //we don't need to send any parameters for this php script, so leave post string empty
-        let postString = ""
-        
+        let postString = "groupID=\(groupID)"
         // actually bundeling up done
         request.httpBody = postString.data(using: String.Encoding.utf8)
         
@@ -127,7 +163,6 @@ class GroupMembersViewController: UIViewController, UITableViewDataSource, UITab
                 print("\n error: ", error ?? "no error explenation given")
                 return;
             }
-            
             // attempt to retrive data from database
             do {
                 
@@ -138,24 +173,22 @@ class GroupMembersViewController: UIViewController, UITableViewDataSource, UITab
                     // parjson will contain an array of Json Dictionaries
                     // each dictionary represents 1 category stored on fatabase
                     // loop through all categories.
-                    for index in 0 ... parseJson.count - 1 {
-                        var tempData = parseJson[index] as! NSDictionary
-                       
-                        // get the category name as a string
-                        var memberName = tempData["account_nickname"] as! String
-                        var memberId = tempData["account_id"] as! String
-                        var tempId = Int(memberId)
-                        self.memberIds.append( tempId!)
-                        self.members.append( memberName)
+                    if(parseJson.count > 0) {
+                        for index in 0 ... parseJson.count - 1 {
+                            var tempData = parseJson[index] as! NSDictionary
+                           
+                            // get the category name as a string
+                            var memberName = tempData["account_nickname"] as! String
+                            var memberId = tempData["account_id"] as! String
+                            var tempId = Int(memberId)
+                            self.memberIds.append( tempId!)
+                            self.members.append( memberName)
+                        }
                     }
-                    
                     self.json = parseJson;
-                    
                     print(self.members)
                     print("server done")
-                    
                 }
-             
                 // *** Important Code ****
                 // this code is needed to update the table view controller
                 // since this code runs on its own thread, there is potential of the
@@ -171,7 +204,6 @@ class GroupMembersViewController: UIViewController, UITableViewDataSource, UITab
             }
         }
         task.resume()
-  
     }
     
 }

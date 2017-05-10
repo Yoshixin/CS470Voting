@@ -13,6 +13,8 @@ class GroupsWithButtonVC: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var grouptableview: UITableView!
     @IBOutlet weak var createbutton: UIButton!
     
+    var selectedGroup = -1
+    
     //  a variable to hold original json data from script in case its needed in future
     var json = NSArray()
     
@@ -38,9 +40,7 @@ class GroupsWithButtonVC: UIViewController, UITableViewDataSource, UITableViewDe
         self.navigationItem.hidesBackButton = true
         let newBackButton = UIBarButtonItem(title: "Home", style: .plain, target: self, action: #selector(transitionBack) )
         self.navigationItem.leftBarButtonItem = newBackButton
-        
-        var selectedGroup = -1
-        
+
         grouptableview.delegate = self
         grouptableview.dataSource = self
         
@@ -72,13 +72,19 @@ class GroupsWithButtonVC: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showAGroup" {
-            let tempGroupController = self.storyboard?.instantiateViewController(withIdentifier: "GroupsTableVC")  as! GroupMembersViewController
-            //tempGroupController.setgroupID(_newID: selectedGroup)
+            
+            let cell = sender as! GroupTableViewCell
+            if let indexPath = grouptableview.indexPath(for: cell){
+                let detailedVC = segue.destination as! GroupMembersViewController
+                detailedVC.setgroupID(_newID: (grouptableview.indexPath(for: cell)?.row)!)
+            }
+            
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //selectedGroup = indexPath.row
+        selectedGroup = indexPath.row
+        
         
     }
     
@@ -150,8 +156,7 @@ class GroupsWithButtonVC: UIViewController, UITableViewDataSource, UITableViewDe
         // bundle up data needed by script in POST method
         request.httpMethod = "POST"
         //we don't need to send any parameters for this php script, so leave post string empty
-        let postString = "" //"a=\(email!)&b=\(password!)"
-        
+        let postString = ""        
         // actually bundeling up done
         request.httpBody = postString.data(using: String.Encoding.utf8)
         
@@ -174,9 +179,7 @@ class GroupsWithButtonVC: UIViewController, UITableViewDataSource, UITableViewDe
                 
                 // converte the data response from php script to json array
                 self.json = (try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSArray)!
-                
-                
-                
+             
                 if let parseJson = self.json as? NSArray  { // unwrap json as an NSArray
                     // parjson will contain an array of Json Dictionaries
                     // each dictionary represents 1 category stored on fatabase
@@ -193,21 +196,14 @@ class GroupsWithButtonVC: UIViewController, UITableViewDataSource, UITableViewDe
                         var tempId = Int(groupId)
                         self.groupIds.append( tempId!)
                         self.groups.append( groupName)
-                        
-                        
-                        
+                 
                     }
                     
                     self.json = parseJson;
-                    
-                    
-                    
-                    
-                    
+          
                     print(self.groups)
                     print("server done")
-                    
-                    
+  
                 }
                 
                 
@@ -219,9 +215,7 @@ class GroupsWithButtonVC: UIViewController, UITableViewDataSource, UITableViewDe
                 DispatchQueue.main.async(execute: {
                     self.grouptableview.reloadData()
                 })
-                
-                // *** ***** ********
-                
+               
                 
             }
             catch let caughtError as NSError {

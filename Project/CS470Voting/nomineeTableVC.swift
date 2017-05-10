@@ -156,10 +156,7 @@ class nomineeTableVC: UITableViewController {
                     // each dictionary represents 1 category stored on database
                     
                     // don't think this is used anymore
-                    globalPushFunctionMsg =  String(parseJson)
-                    
-                    
-                    
+                    globalPushFunctionMsg =  String(parseJson)   
                 }
                 globalPushFunctionMsg =  "No string from php"
                 
