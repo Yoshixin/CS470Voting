@@ -27,8 +27,18 @@ class GroupsWithButtonVC: UIViewController, UITableViewDataSource, UITableViewDe
     //var dummyGroups = [String]() //dummy variable for testing, delete
     // relpace this with groups[String] when done
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidLoad()
+        
+        self.grouptableview.reloadData()
+    }
     
     override func viewDidLoad() {
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(transitionBack) )
+        self.navigationItem.leftBarButtonItem = newBackButton
+        
         grouptableview.delegate = self
         grouptableview.dataSource = self
         
@@ -43,7 +53,21 @@ class GroupsWithButtonVC: UIViewController, UITableViewDataSource, UITableViewDe
         grouptableview.tableHeaderView = searchController.searchBar
         
         super.viewDidLoad()
+        
+        self.grouptableview.reloadData()
     }
+    
+    func transitionBack() {
+        //self.performSegue(withIdentifier: "GroupsToHome", sender: self)
+        let tempHomeController = self.storyboard?.instantiateViewController(withIdentifier: "Home")  as! HomeViewController
+        
+        tempHomeController.navigationItem.hidesBackButton = true
+        // transition to ChatLogTableVC and display message thread for this user and you
+        self.navigationController?.pushViewController(tempHomeController ,animated: true)
+
+        
+    }
+    
     
     /* Functions for searching */
     func updateSearchResultsForSearchController(searchController: UISearchController) {

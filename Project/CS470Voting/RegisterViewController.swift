@@ -114,7 +114,7 @@ class RegisterViewController: UIViewController {
             
             // if the connection fails to even connect at all
             if error != nil {
-                print("error:", error ?? "**No response revievd**" )
+                print("error:", error ?? "**No response received**" )
                 return;
             }
             

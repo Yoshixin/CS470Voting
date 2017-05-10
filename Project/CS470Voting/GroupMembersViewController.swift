@@ -17,6 +17,7 @@ class GroupMembersViewController: UIViewController, UITableViewDataSource, UITab
     var memberIds = [Int]()
     
     var dummyMems = [String]() //dummy variable for testing, delete
+    // replace with members[string] later
     
     override func viewDidLoad() {
         super.viewDidLoad()
