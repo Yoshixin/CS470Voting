@@ -95,6 +95,7 @@ class GroupMembersViewController: UIViewController, UITableViewDataSource, UITab
                         gDisplayMSG( myMessage: "Try joining again.",  myTitle: "Sorry, an Error ocured", sendSelf : self )
                     })
                 }
+                self.downloadMembers()
                 self.tableview.reloadData()
                 globalPushFunctionMsg =  "No string from php"
             }
@@ -104,6 +105,7 @@ class GroupMembersViewController: UIViewController, UITableViewDataSource, UITab
             }
         }
         task.resume()
+        self.tableview.reloadData()
 
         
     }
@@ -130,14 +132,23 @@ class GroupMembersViewController: UIViewController, UITableViewDataSource, UITab
     //end of table view data sources
     
     
-    /*
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     
+        if segue.identifier == "showMemberVotes" {
+            
+            let cell = sender as! GroupMembersViewCell
+            if let indexPath = tableview.indexPath(for: cell){
+                let detailedVC = segue.destination as! MemberVotesTableVC
+                detailedVC.setAccountID(_newID: (tableview.indexPath(for: cell)?.row)!)
+                let accountID = self.memberIds[(tableview.indexPath(for: cell)?.row)!]
+                detailedVC.setAccountID(_newID: accountID)
+            }
+            
+        }
      }
-     */
+     
     
     func downloadMembers()  {
         // currently the php script to inseert data is on my blue account
@@ -181,8 +192,12 @@ class GroupMembersViewController: UIViewController, UITableViewDataSource, UITab
                             var memberName = tempData["account_nickname"] as! String
                             var memberId = tempData["account_id"] as! String
                             var tempId = Int(memberId)
-                            self.memberIds.append( tempId!)
-                            self.members.append( memberName)
+                            if (!self.members.contains(memberName)){
+                                self.members.append(memberName)
+                            }
+                            if (!self.memberIds.contains(tempId!)) {
+                                self.memberIds.append(tempId!)
+                            }
                         }
                     }
                     self.json = parseJson;

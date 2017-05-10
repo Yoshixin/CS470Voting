@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1CC70B8C8DF5A9DBD554E255 /* Pods_CS470VotingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3737C6ADD9FEDC44959879B /* Pods_CS470VotingTests.framework */; };
+		3F03BA891EC3A0D9006C57B3 /* MemberVotesTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F03BA881EC3A0D9006C57B3 /* MemberVotesTableVC.swift */; };
 		3F0F2D891EA587E8005AD45A /* categoriesTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0F2D881EA587E8005AD45A /* categoriesTableVC.swift */; };
 		3F0F2D8B1EA588E1005AD45A /* categoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0F2D8A1EA588E1005AD45A /* categoriesTableViewCell.swift */; };
 		3F30F3861E931DCB00E90631 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30F3851E931DCB00E90631 /* AppDelegate.swift */; };
@@ -62,6 +63,7 @@
 
 /* Begin PBXFileReference section */
 		36150CEABE0219E3EDF8E721 /* Pods_CS470Voting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CS470Voting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F03BA881EC3A0D9006C57B3 /* MemberVotesTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberVotesTableVC.swift; sourceTree = "<group>"; };
 		3F0F2D881EA587E8005AD45A /* categoriesTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = categoriesTableVC.swift; sourceTree = "<group>"; };
 		3F0F2D8A1EA588E1005AD45A /* categoriesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = categoriesTableViewCell.swift; sourceTree = "<group>"; };
 		3F30F3821E931DCB00E90631 /* CS470Voting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CS470Voting.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -230,6 +232,7 @@
 				3F0F2D881EA587E8005AD45A /* categoriesTableVC.swift */,
 				67CD0BC11EA6FE76003C75F3 /* nomineeTableVC.swift */,
 				3FD079601EC2C999003BBF56 /* MyVotesTableVC.swift */,
+				3F03BA881EC3A0D9006C57B3 /* MemberVotesTableVC.swift */,
 			);
 			name = TableViewControllers;
 			sourceTree = "<group>";
@@ -562,6 +565,7 @@
 				3FD079631EC2CC23003BBF56 /* myVotesTableViewCell.swift in Sources */,
 				6702245E1EBEE34100C0E26C /* NewMessageTableVC.swift in Sources */,
 				6749BDE01EA84D2500F0D94B /* RegisterViewController.swift in Sources */,
+				3F03BA891EC3A0D9006C57B3 /* MemberVotesTableVC.swift in Sources */,
 				670224631EBF05A900C0E26C /* ChatLogTableVC.swift in Sources */,
 				3F0F2D8B1EA588E1005AD45A /* categoriesTableViewCell.swift in Sources */,
 				677CA3171EBFA310009FF3CA /* aMessageObject.swift in Sources */,
